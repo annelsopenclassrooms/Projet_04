@@ -1,10 +1,12 @@
 import json
 import os
 from views.tournamentview import TournamentView
+from views.playerview import PlayerView
+from models.player import Player
 
 
 class TournamentController:
-    def create_tournament():
+    def create_tournament(self):
         c = TournamentView()
         data = c.get_tournament_input_creation()
 
@@ -25,8 +27,27 @@ class TournamentController:
 
         print("Le tournois a été crée avec succès.")
 
-    
+    def instantiate_players(self, players):
 
+        # Création des objets et récupération dans une liste
+        players_in_tournment = [Player(**data) for data in players]
+
+        # Accéder à la liste des objets
+        print("Liste des objets :", players_in_tournment)
+
+        # Accéder à un objet spécifique
+        print("Premier objet :", players_in_tournment[0])
+
+        return(players_in_tournment)
+
+    #     # Itérer sur les objets
+    #     for person in persons:
+    # print(f"Nom: {person.name}, Âge: {person.age}")
+
+
+
+
+        pass  
 
         # class TournamentController {
         #     +create_tournament()
