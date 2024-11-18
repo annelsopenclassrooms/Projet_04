@@ -1,13 +1,11 @@
 import json
 import os
-# from models.player import Player
-from views.createplayerview import CreatePlayerView
-
+from views.playerview import PlayerView
 
 class PlayerController:
     def create_player():
-        c = CreatePlayerView()
-        data = c.input_player_info()
+        c = PlayerView()
+        data = c.get_player_input()
 
         if os.path.exists("test.json"):
             # Si le fichier existe, on le charge
@@ -30,4 +28,7 @@ class PlayerController:
         pass
 
     def get_player_list():
+        pass
+
+    def get_players_list():
         pass

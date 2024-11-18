@@ -11,6 +11,8 @@ class Player:
 #    def update_points(self):
 #		    pass
 
+    
+
 
 player = Player("anne", "ls", "25/01/1979",12333, 6)
 

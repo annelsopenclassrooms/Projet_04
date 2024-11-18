@@ -1,5 +1,5 @@
-class CreatePlayerView:
-    def input_player_info(self):
+class PlayerView:
+    def get_player_input(self):
         dict_infos = {}
         dict_for_json = {}
         dict_infos["last_name"] = input("Nom du joueur ?: ")
