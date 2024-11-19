@@ -1,3 +1,6 @@
+from models.tounament import Tournament
+
+
 class TournamentView:
     def get_tournament_input_creation(self):
         dict_tournament_for_json = {}
@@ -9,6 +12,10 @@ class TournamentView:
 
     def add_player_to_tournament(self, id_chess):
         pass
+
+    def display_tournament_infos(self):
+        
+        print(Tournament.all)
 
 
 # class TournamentView {

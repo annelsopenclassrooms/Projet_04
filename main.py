@@ -1,6 +1,7 @@
 #TODO corrections: blinder tous les input
 # empecher 2 fois le meme joueurs dans un tournois
-# 
+# empecher creation d'un tournois quand un est en cours
+empecher ajout de joueur si tournois pas creer
 
 
 
@@ -28,4 +29,5 @@ from views.menu import Menu
 # p.get_players_list()
 
 m = Menu()
-m.add_player_choice_list()
+#m.add_player_choice_list()
+m.main_menu()

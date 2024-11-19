@@ -1,10 +1,13 @@
 class Player:
+    all = []
     def __init__(self, last_name, first_name, birth_date, chess_id, total_points = 0):
         self.last_name = last_name
         self.first_name = first_name
         self.birth_date = birth_date
         self.chess_id = chess_id
         self.total_points = total_points
+
+        Player.all.append(self)
 
 
 
@@ -18,11 +21,3 @@ class Player:
 #    def update_points(self):
 #		    pass
 
-    
-
-
-player = Player("anne", "ls", "25/01/1979",12333, 6)
-
-
-# print(player.total_points)
-player.get_total_points()
