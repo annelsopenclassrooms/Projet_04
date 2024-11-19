@@ -15,14 +15,11 @@ player4 = Player("clarisse", "aze", "12/12/12", "aze232323")
 #Round.round1_matches()
 
 Tournament("aze", "ezaea", "12", "6")
-# print(Tournament.all[0])
-# print("#####")
+
+r = Round(Tournament.all[0].current_round)
+r.generate_round1_matches()
+Tournament.all[0].rounds.append(r)
 #Tournament.all[0].rounds.append(Round.round1_matches())
-#print(Tournament.all[0])
-#print("#####")
-Tournament.all[0].rounds.append(Round.round1_matches())
-#print(Tournament.all[0])
-# matches = Tournament.all[0].rounds[Tournament.all[0].current_round]
-# print (matches)
+
 m = MatchesView()
 m.input_results()

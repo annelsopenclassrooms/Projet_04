@@ -47,15 +47,17 @@ class TournamentController:
         # Accéder à un objet spécifique
         #print("Premier objet :", players_in_tournament[0])
 
-        return(players_in_tournament)
+        return (players_in_tournament)
 
     def start_tournament(self):
-        m = MatchesView()
-        #add generated list of matches for round 1 to object Tournament
+        
+        r = Round(Tournament.all[0].current_round)
+        r.generate_round1_matches()
+        Tournament.all[0].rounds.append(r)
+        
         #Tournament.all[0].rounds.append(Round.round1_matches())
-        Tournament.all[0].rounds.append(Round.round1_matches())
-        print(Tournament.all[0])
-
+        #print(Tournament.all[0])
+        m = MatchesView()
         m.input_results()
         
 

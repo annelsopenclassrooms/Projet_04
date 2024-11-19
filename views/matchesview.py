@@ -6,7 +6,8 @@ class MatchesView:
     # enter all matches resultat from a round
     def input_results(self):
         #get matches from the current round
-        matches = Tournament.all[0].rounds[Tournament.all[0].current_round]
+        matches = Tournament.all[0].rounds[Tournament.all[0].current_round].matches
+        print (matches)
         for match in matches:
             #print(matches)
             print ("Qui a gagné le match?")
