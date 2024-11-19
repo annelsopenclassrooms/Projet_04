@@ -14,7 +14,7 @@ class TournamentView:
         pass
 
     def display_tournament_infos(self):
-        
+        print("tous les tournois (tournamentview, def display tournament info)")
         print(Tournament.all)
 
 

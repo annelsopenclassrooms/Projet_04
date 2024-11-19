@@ -1,7 +1,7 @@
 #TODO corrections: blinder tous les input
 # empecher 2 fois le meme joueurs dans un tournois
 # empecher creation d'un tournois quand un est en cours
-empecher ajout de joueur si tournois pas creer
+#empecher ajout de joueur si tournois pas creer
 
 
 

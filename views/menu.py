@@ -1,6 +1,7 @@
 from controllers.playercontroller import PlayerController
 from controllers.tournamentcontroller import TournamentController
 from views.tournamentview import TournamentView
+from models.round import Round
 
 
 class Menu:
@@ -11,6 +12,7 @@ class Menu:
             print("1. Creer des joueurs")
             print("2. Tournois")
             print("3. Rapports")
+            print("4. Quitter le programme")
             choice = int(input("choix ?:"))
             m = Menu()
 
@@ -23,6 +25,8 @@ class Menu:
                     break
                 case 3:
                     pass
+                case 4:
+                    exit()
 
     def tournament_menu(self):
         tv = TournamentView()
@@ -31,8 +35,8 @@ class Menu:
             print("1. Creer un tournois")
             print("2. Ajouter des joueurs au tournois")
             print("3. Lancer le tournois")
-            print("3. Afficher les infos du tournois")
-            print("4. Retour")
+            print("4. Afficher les infos du tournois")
+            print("5. Retour")
             choice = int(input("choix ?:"))
             m = Menu()
             tc = TournamentController()
@@ -42,8 +46,10 @@ class Menu:
                 case 2:
                     m.add_player_choice_list()
                 case 3:
-                    pass
+                    Round.round1()
+                    
                 case 4:
+                    print("case: 4 afficher infos tournois")
                     tv.display_tournament_infos()
                 case 4:
                     m.main_menu()
