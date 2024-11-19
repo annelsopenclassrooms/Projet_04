@@ -1,7 +1,7 @@
 from controllers.playercontroller import PlayerController
 from controllers.tournamentcontroller import TournamentController
 from views.tournamentview import TournamentView
-from models.round import Round
+
 
 
 class Menu:
@@ -46,12 +46,11 @@ class Menu:
                 case 2:
                     m.add_player_choice_list()
                 case 3:
-                    Round.round1()
-                    
+                    tc.start_tournament()
                 case 4:
                     print("case: 4 afficher infos tournois")
                     tv.display_tournament_infos()
-                case 4:
+                case 5:
                     m.main_menu()
 
 

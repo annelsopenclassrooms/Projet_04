@@ -18,6 +18,7 @@ class Tournament:
         return (
             f"Tournament(name={self.name!r}, location={self.location!r}, "
             f"start_date={self.start_date!r}, end_date={self.end_date!r}, "
+            f"rounds = {self.rounds}, "
             f"rounds_number={self.rounds_number}, current_round={self.current_round}, "
             f"players={len(self.players)}, description={self.description!r})"
         )

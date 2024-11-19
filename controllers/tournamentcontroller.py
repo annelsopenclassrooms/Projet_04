@@ -4,6 +4,8 @@ from views.tournamentview import TournamentView
 from views.playerview import PlayerView
 from models.player import Player
 from models.tounament import Tournament
+from models.round import Round
+from views.matchesview import MatchesView
 
 
 class TournamentController:
@@ -47,19 +49,13 @@ class TournamentController:
 
         return(players_in_tournament)
 
-    #     # Itérer sur les objets
-    #     for person in persons:
-    # print(f"Nom: {person.name}, Âge: {person.age}")
+    def start_tournament(self):
+        m = MatchesView()
+        #add generated list of matches for round 1 to object Tournament
+        #Tournament.all[0].rounds.append(Round.round1_matches())
+        Tournament.all[0].rounds.append(Round.round1_matches())
+        print(Tournament.all[0])
 
+        m.input_results()
+        
 
-
-
-        pass  
-
-        # class TournamentController {
-        #     +create_tournament()
-        #     +start_round()
-        #     +end_round()
-        #     +enter_results()
-        #     +generate_pairs()
-        # }

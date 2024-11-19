@@ -1,6 +1,6 @@
 class Player:
     all = []
-    def __init__(self, last_name, first_name, birth_date, chess_id, total_points = 0):
+    def __init__(self, last_name, first_name, birth_date, chess_id, total_points: float = 0.0):
         self.last_name = last_name
         self.first_name = first_name
         self.birth_date = birth_date
