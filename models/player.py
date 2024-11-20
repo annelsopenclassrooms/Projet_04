@@ -1,3 +1,5 @@
+from models.tounament import Tournament
+
 class Player:
     all = []
     def __init__(self, last_name, first_name, birth_date, chess_id, total_points: float = 0.0):
@@ -9,6 +11,7 @@ class Player:
 
         Player.all.append(self)
 
+        
 
 
     def __repr__(self):
@@ -18,6 +21,18 @@ class Player:
 
     def get_total_points(self):
         print(f"Le joueur {self.last_name} {self.first_name} a {self.total_points} points")
-#    def update_points(self):
-#		    pass
+
+    @staticmethod
+    def sort_by_total_points():
+
+        #print(Tournament.all[0])
+        players = Tournament.all[0].players
+
+        sorted_players = sorted(players, key=lambda player: player.total_points, reverse=True)
+        Tournament.all[0].players = sorted_players
+
+        #print(Tournament.all[0])
+        #return (sorted_players)
+    
+        #print(Tournament.all[0])
 

@@ -1,25 +1,25 @@
 [
     {
-        "last_name": "Camille1",
-        "first_name": "Sergine",
+        "last_name": "Anne",
+        "first_name": "LS",
         "birth_date": "25/08/1999",
         "chess_id": "AB12341"
     },
     {
-        "last_name": "Camille2",
+        "last_name": "Eric",
         "first_name": "Sergine",
         "birth_date": "25/08/1999",
         "chess_id": "AB12345"
     },
     {
-        "last_name": "David1",
-        "first_name": "Sergine",
+        "last_name": "David",
+        "first_name": "Heim",
         "birth_date": "25/08/1999",
         "chess_id": "AB12346"
     },
     {
-        "last_name": "David2",
-        "first_name": "Sergine",
+        "last_name": "thomas",
+        "first_name": "meyer",
         "birth_date": "25/08/1999",
         "chess_id": "AB12347"
     },

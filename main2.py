@@ -23,3 +23,8 @@ Tournament.all[0].rounds.append(r)
 
 m = MatchesView()
 m.input_results()
+
+
+
+# p = Player
+# print(p.sort_by_total_points())

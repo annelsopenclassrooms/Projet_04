@@ -41,6 +41,9 @@ class TournamentController:
         # Création des objets et récupération dans une liste
         players_in_tournament = [Player(**data) for data in players]
 
+        Tournament.all[0].players = players_in_tournament
+        #Tournament.all[0].players.append(players_in_tournament)
+
         # Accéder à la liste des objets
         print("Liste des objets :", players_in_tournament)
 
@@ -49,15 +52,31 @@ class TournamentController:
 
         return (players_in_tournament)
 
+       
     def start_tournament(self):
         
         r = Round(Tournament.all[0].current_round)
         r.generate_round1_matches()
         Tournament.all[0].rounds.append(r)
+        print(Tournament.all[0])
         
         #Tournament.all[0].rounds.append(Round.round1_matches())
         #print(Tournament.all[0])
         m = MatchesView()
         m.input_results()
+
+
+        Player.sort_by_total_points()
+
+        #Set 1 to current round in tournament
+        Tournament.all[0].current_round = 1
+
+        r = Round(Tournament.all[0].current_round)   
+        r.generate_round()
+
+        #add round to tournament
+        Tournament.all[0].rounds.append(r)
         
 
+
+        exit()

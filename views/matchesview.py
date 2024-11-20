@@ -7,7 +7,7 @@ class MatchesView:
     def input_results(self):
         #get matches from the current round
         matches = Tournament.all[0].rounds[Tournament.all[0].current_round].matches
-        print (matches)
+        #print (matches)
         for match in matches:
             #print(matches)
             print ("Qui a gagné le match?")
@@ -20,15 +20,15 @@ class MatchesView:
                         
             match choice:
                 case 1:
-                    print(match[0])
+                    #print(match[0])
                     match[0][1] = 1
                     
                     match[0][0].total_points = match[0][0].total_points + 1
-                    print(match[0])
+                    #print(match[0])
                 case 2:
                     match[1][1] = 1
                     match[1][0].total_points = match[1][0].total_points + 1
-                    print(match[1])
+                    #print(match[1])
 
                 case 3:
                     match[0][1] = 0.5
@@ -36,4 +36,4 @@ class MatchesView:
                     match[0][0].total_points = match[0][0].total_points + 0.5
                     match[1][0].total_points = match[1][0].total_points + 0.5
 
-                    print(match)
+                    #print(match)
