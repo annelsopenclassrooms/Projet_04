@@ -1,0 +1,31 @@
+#TODO corrections: blinder tous les input
+# empecher 2 fois le meme joueurs dans un tournois
+# empecher creation d'un tournois quand un est en cours
+#empecher ajout de joueur si tournois pas creer
+
+
+
+#TODO features
+# matches
+# rounds
+
+
+Mentor 21/11
+
+Faire un diagramme des flux (utilise pour la presentation, a montrer avant de lancer le programme)
+
+* ne pas utiliser des variables a une lettre (les instances !!)
+
+* utiliser debugger python pdb
+
+* je peux faire une fonction save dans les modes 
+    Tournament
+        def save
+        def read
+
+    Sous forme d'heritage des class abstraite pour save et read
+
+
+interdire nb de joueur impaire
+
+utiliser main pour stocker les instances tournament et le liste des instances de players du tournoi
