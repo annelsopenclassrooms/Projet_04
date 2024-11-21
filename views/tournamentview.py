@@ -17,6 +17,14 @@ class TournamentView:
         print("tous les tournois (tournamentview, def display tournament info)")
         print(Tournament.all)
 
+    @staticmethod
+    def display_ranking():
+        players = Tournament.all[0].players
+        print(players)
+        for player in players:
+            print(f"{player.last_name} {player.first_name} {player.total_points} points")
+
+
 
 # class TournamentView {
 #     +display_tournament_form()

@@ -31,8 +31,3 @@ class Player:
         sorted_players = sorted(players, key=lambda player: player.total_points, reverse=True)
         Tournament.all[0].players = sorted_players
 
-        #print(Tournament.all[0])
-        #return (sorted_players)
-    
-        #print(Tournament.all[0])
-

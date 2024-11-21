@@ -68,6 +68,10 @@ class TournamentController:
 
         Player.sort_by_total_points()
 
+        print("Classement actuel")
+        TournamentView.display_ranking()
+
+
         #Set 1 to current round in tournament
         Tournament.all[0].current_round = 1
 
