@@ -3,7 +3,6 @@ from controllers.tournamentcontroller import TournamentController
 from views.tournamentview import TournamentView
 
 
-
 class Menu:
 
     def main_menu(self):
@@ -14,22 +13,20 @@ class Menu:
             print("3. Rapports")
             print("4. Quitter le programme")
             choice = int(input("choix ?:"))
-            m = Menu()
+            menu = Menu()
 
             match choice:
                 case 1:
-                    pass
+                    menu.add_player_choice_list()
                 case 2:
-                    m.tournament_menu()
-                    pass
-                    break
+                    menu.tournament_menu()
                 case 3:
                     pass
                 case 4:
                     exit()
 
     def tournament_menu(self):
-        tv = TournamentView()
+        tournamentview = TournamentView()
         while True:
             print("Menu tournois")
             print("1. Creer un tournois")
@@ -38,20 +35,20 @@ class Menu:
             print("4. Afficher les infos du tournois")
             print("5. Retour")
             choice = int(input("choix ?:"))
-            m = Menu()
-            tc = TournamentController()
+            menu = Menu()
+            tournamentcontroller = TournamentController()
             match choice:
                 case 1:
-                    tc.create_tournament()            
+                    tournamentcontroller.create_tournament()            
                 case 2:
-                    m.add_player_choice_list()
+                    menu.add_player_choice_list()
                 case 3:
-                    tc.start_tournament()
+                    tournamentcontroller.start_tournament()
                 case 4:
                     print("case: 4 afficher infos tournois")
-                    tv.display_tournament_infos()
+                    tournamentview.display_tournament_infos()
                 case 5:
-                    m.main_menu()
+                    menu.main_menu()
 
 
 

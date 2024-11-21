@@ -2,10 +2,11 @@ import json
 import os
 from views.tournamentview import TournamentView
 from views.playerview import PlayerView
-from models.player import Player
-from models.tounament import Tournament
-from models.round import Round
 from views.matchesview import MatchesView
+from models.tournament import Tournament
+from models.round import Round
+from models.player import Player
+
 
 
 class TournamentController:

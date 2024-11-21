@@ -1,7 +1,7 @@
 from datetime import datetime
 import random
 from models.player import Player
-from models.tounament import Tournament
+from openclassrooms.Projet_04.models.tournament import Tournament
 
 class Round:
     all = []

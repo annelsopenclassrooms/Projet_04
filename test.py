@@ -6,7 +6,7 @@ import random
 
 from models.round import Round
 from models.player import Player
-from models.tounament import Tournament
+from openclassrooms.Projet_04.models.tournament import Tournament
 
 player1 = Player("cathy", "aze", "12/12/12", "aze232323")
 player2 = Player("anne", "aze", "12/12/12", "aze232323")

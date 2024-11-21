@@ -1,4 +1,4 @@
-from models.tounament import Tournament
+from openclassrooms.Projet_04.models.tournament import Tournament
 
 
 class TournamentView:
