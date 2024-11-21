@@ -11,9 +11,8 @@ from models.player import Player
 
 class TournamentController:
     def create_tournament(self):
-        c = TournamentView()
-        
-        data = c.get_tournament_input_creation()
+        tournamentview = TournamentView()
+        data = tournamentview.get_tournament_input_creation()
 
         if os.path.exists("test-tournament.json"):
             # Si le fichier existe, on le charge
@@ -37,12 +36,12 @@ class TournamentController:
 
         return(tournament)
 
-    def instantiate_players(self, players):
+    def instantiate_players(self, players, tournament):
 
         # Création des objets et récupération dans une liste
         players_in_tournament = [Player(**data) for data in players]
 
-        Tournament.all[0].players = players_in_tournament
+        tournament.players = players_in_tournament
         #Tournament.all[0].players.append(players_in_tournament)
 
         # Accéder à la liste des objets

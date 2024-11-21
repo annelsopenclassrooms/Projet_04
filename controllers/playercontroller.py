@@ -42,7 +42,7 @@ class PlayerController:
         number = 1
         for dict in data:
             
-            print(f"{number}. {dict["first_name"]} {dict["last_name"]}, date de naissance: {dict["birth_date"]}, chess ID: {dict["chess_id"]}")
+            print(f'{number}. {dict["first_name"]} {dict["last_name"]}, date de naissance: {dict["birth_date"]}, chess ID: {dict["chess_id"]}')
             number = number + 1
 
         # return list of dictionnaries contained in the json file

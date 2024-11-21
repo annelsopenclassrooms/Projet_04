@@ -14,12 +14,13 @@ class Menu:
             print("4. Quitter le programme")
             choice = int(input("choix ?:"))
             menu = Menu()
+            return (choice)
 
             match choice:
                 case 1:
                     menu.add_player_choice_list()
                 case 2:
-                    menu.tournament_menu()
+                    tournament = menu.tournament_menu()
                 case 3:
                     pass
                 case 4:
@@ -27,28 +28,30 @@ class Menu:
 
     def tournament_menu(self):
         tournamentview = TournamentView()
-        while True:
-            print("Menu tournois")
-            print("1. Creer un tournois")
-            print("2. Ajouter des joueurs au tournois")
-            print("3. Lancer le tournois")
-            print("4. Afficher les infos du tournois")
-            print("5. Retour")
-            choice = int(input("choix ?:"))
-            menu = Menu()
-            tournamentcontroller = TournamentController()
-            match choice:
-                case 1:
-                    tournamentcontroller.create_tournament()            
-                case 2:
-                    menu.add_player_choice_list()
-                case 3:
-                    tournamentcontroller.start_tournament()
-                case 4:
-                    print("case: 4 afficher infos tournois")
-                    tournamentview.display_tournament_infos()
-                case 5:
-                    menu.main_menu()
+        #while True:
+        print("Menu tournois")
+        print("1. Creer un tournois")
+        print("2. Ajouter des joueurs au tournois")
+        print("3. Lancer le tournois")
+        print("4. Afficher les infos du tournois")
+        print("5. Retour")
+        choice = int(input("choix ?:"))
+        menu = Menu()
+        tournamentcontroller = TournamentController()
+        match choice:
+            case 1:
+                tournament = tournamentcontroller.create_tournament()            
+            case 2:
+                menu.add_player_choice_list()
+            case 3:
+                tournamentcontroller.start_tournament()
+            case 4:
+                print("case: 4 afficher infos tournois")
+                tournamentview.display_tournament_infos()
+            case 5:
+                menu.main_menu()
+
+        return (tournament)
 
 
 
@@ -67,27 +70,29 @@ class Menu:
             choice = input("choix ?:")
             choice = int(choice)
             print(choice)
-            m = Menu()
+            menu = Menu()
+
+            return(choice)
             
             match choice:
                 case 1:
                     print("Ajouter un joueur depuis la liste des joueurs existants.")
-                    player_in_tournament.append(m.get_player_from_list())
+                    player_in_tournament.append(menu.get_player_from_list())
                 case 2:
                     print("Ajouter un joueur depuis son Chess ID.")
-                    player_in_tournament.append(m.get_player_from_chess_id())
+                    player_in_tournament.append(menu.get_player_from_chess_id())
                 case 3:
                     print("Créer un nouveau joueur et l'ajouter au tournoi.")
-                    p = PlayerController()
-                    player_in_tournament.append(p.create_player())
+                    playercontroller = PlayerController()
+                    player_in_tournament.append(playercontroller.create_player())
 
 
                 case 4:
                     print("Fin d'import des joueurs.")
-                    t = TournamentController()
-                    t.instantiate_players(player_in_tournament)
-                    # TODO: instancier les joueurs => Fait
-                    m.tournament_menu()
+                    tournamentcontroller = TournamentController()
+                    tournamentcontroller.instantiate_players(player_in_tournament)
+                    
+                    menu.tournament_menu()
                     break
                 case _:
                     print("Choix invalide. Veuillez choisir une option entre 1 et 4.")

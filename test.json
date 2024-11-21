@@ -28,5 +28,11 @@
         "first_name": "Christine",
         "birth_date": "23/32/32",
         "chess_id": "az123400"
+    },
+    {
+        "last_name": "Claire",
+        "first_name": "Damasio",
+        "birth_date": "23/09/1998",
+        "chess_id": "GH12345"
     }
 ]
