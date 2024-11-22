@@ -13,14 +13,14 @@ class TournamentView:
     def add_player_to_tournament(self, id_chess):
         pass
 
-    def display_tournament_infos(self):
+    def display_tournament_infos(self, tournament):
         print("tous les tournois (tournamentview, def display tournament info)")
-        print(Tournament.all)
+        print(tournament)
 
-    @staticmethod
-    def display_ranking():
-        players = Tournament.all[0].players
-        print(players)
+    
+    def display_ranking(tournament):
+        players = tournament.players
+        #print(players)
         for player in players:
             print(f"{player.last_name} {player.first_name} {player.total_points} points")
 

@@ -8,7 +8,6 @@ from models.round import Round
 from models.player import Player
 
 
-
 class TournamentController:
     def create_tournament(self):
         tournamentview = TournamentView()
@@ -34,53 +33,44 @@ class TournamentController:
         print("Le tournois a été crée avec succès.")
         print(tournament.name)
 
-        return(tournament)
+        return (tournament)
 
     def instantiate_players(self, players, tournament):
 
         # Création des objets et récupération dans une liste
         players_in_tournament = [Player(**data) for data in players]
-
         tournament.players = players_in_tournament
-        #Tournament.all[0].players.append(players_in_tournament)
-
-        # Accéder à la liste des objets
-        print("Liste des objets :", players_in_tournament)
-
-        # Accéder à un objet spécifique
-        #print("Premier objet :", players_in_tournament[0])
-
         return (players_in_tournament)
 
-       
-    def start_tournament(self):
-        
-        r = Round(Tournament.all[0].current_round)
-        r.generate_round1_matches()
-        Tournament.all[0].rounds.append(r)
-        print(Tournament.all[0])
-        
-        #Tournament.all[0].rounds.append(Round.round1_matches())
-        #print(Tournament.all[0])
-        m = MatchesView()
-        m.input_results()
+    def start_tournament(self, tournament):
 
+        round = Round(tournament.current_round)
+        round.generate_round_matches(tournament)
+        tournament.rounds.append(round)
+        matchview = MatchesView()
+        matchview.input_results(tournament)
 
         Player.sort_by_total_points()
 
         print("Classement actuel")
-        TournamentView.display_ranking()
+        TournamentView.display_ranking(tournament)
+
+####################################
+#a factoriser
 
 
-        #Set 1 to current round in tournament
-        Tournament.all[0].current_round = 1
+        # Set 1 to current round in tournament
+        tournament.current_round = 1
 
-        r = Round(Tournament.all[0].current_round)   
-        r.generate_round()
-
-        #add round to tournament
-        Tournament.all[0].rounds.append(r)
         
 
+        round = Round(tournament.current_round)   
+        round.generate_round_matches(tournament)
 
-        exit()
+        # add round to tournament
+        tournament.rounds.append(round)
+
+        matchview.input_results(tournament)
+
+        print("Classement actuel")
+        TournamentView.display_ranking(tournament)

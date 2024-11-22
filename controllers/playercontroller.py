@@ -5,8 +5,8 @@ from views.playerview import PlayerView
 
 class PlayerController:
     def create_player(self):
-        c = PlayerView()
-        data = c.get_player_input()
+        playerview = PlayerView()
+        data = playerview.get_player_input()
 
         if os.path.exists("test.json"):
             # Si le fichier existe, on le charge
