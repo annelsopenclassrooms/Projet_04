@@ -36,29 +36,45 @@ class Round:
 
         players = tournament.players
 
-# TODO if 1er round shuffle et pas de verif paire deja existante
-        random.shuffle(players)
+        # TODO if 1er round shuffle et pas de verif paire deja existante
+
+        if tournament.current_round == 0:
+
+            random.shuffle(players)
+
+        else:
+            pass
+
         nb_player = len(players)
 
         nb_matches = nb_player / 2
-        player1 = 0
-        player2 = 1
+        index_player1 = 0
+        index_player2 = 1
+
+        #print(tournament.rounds)
         while nb_matches > 0:
 
-            self.matches.append(([players[player1], 0], [players[player2], 0]))
+            match = ([players[index_player1], 0], [players[index_player2], 0])
+            
+            if tournament.current_round > 0:
+                print(Round.is_existing_pair(players[index_player1], players[index_player2], tournament))
+            self.matches.append(match)
+
+
             nb_matches = nb_matches - 1
-            player1 = player1 + 2
-            player2 = player2 + 2
+            index_player1 = index_player1 + 2
+            index_player2 = index_player2 + 2
 
-    # def generate_round_matches(self, tournament):
-    #     players = tournament.players
-    #     nb_player = len(players)
-    #     nb_matches = nb_player / 2
-    #     player1 = 0
-    #     player2 = 1
-    #     while nb_matches > 0:
+    
 
-    #         self.matches.append(([players[player1], 0], [players[player2], 0]))
-    #         nb_matches = nb_matches - 1
-    #         player1 = player1 + 2
-    #         player2 = player2 + 2
+    @staticmethod
+    def is_existing_pair(player1, player2, tournament):
+        for round in tournament.rounds:
+
+            for pair in round.matches:
+
+                if (player1 == pair[0][0] and player2 == pair[1][0]) or (player2 == pair[0][0] and player1 == pair[1][0]):
+                    return True
+                
+        return False
+
