@@ -44,33 +44,21 @@ class TournamentController:
 
     def start_tournament(self, tournament):
 
-        round = Round(tournament.current_round)
-        round.generate_round_matches(tournament)
-        tournament.rounds.append(round)
-        matchview = MatchesView()
-        matchview.input_results(tournament)
+        while True:
+            round = Round(tournament.current_round)
+            round.generate_round_matches(tournament)
+            # add round to tournament
+            tournament.rounds.append(round)
+            matchview = MatchesView()
+            matchview.input_results(tournament)
 
-        #Player.sort_by_total_points(tournament)
+            Player.sort_by_total_points(tournament)
 
-        print("Classement actuel")
-        TournamentView.display_ranking(tournament)
+            print("Classement actuel")
+            TournamentView.display_ranking(tournament)
 
-####################################
-#a factoriser
-
-
-        # Set 1 to current round in tournament
-        tournament.current_round = 1
-
-        
-
-        round = Round(tournament.current_round)   
-        round.generate_round_matches(tournament)
-
-        # add round to tournament
-        tournament.rounds.append(round)
-
-        matchview.input_results(tournament)
-
-        print("Classement actuel")
-        TournamentView.display_ranking(tournament)
+            # Update current round in tournament
+            tournament.current_round = tournament.current_round + 1
+            
+            if tournament.current_round > tournament.rounds_number:
+                break
