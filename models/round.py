@@ -35,37 +35,45 @@ class Round:
     def generate_round_matches(self, tournament):
 
         players = tournament.players
+        nb_player = len(players)
+        nb_matches = nb_player / 2
+        index_player1 = 0
+        index_player2 = 1
 
         # TODO if 1er round shuffle et pas de verif paire deja existante
 
         if tournament.current_round == 0:
 
             random.shuffle(players)
+            
+            while nb_matches > 0:
+                players = tournament.players
+                match = ([players[index_player1], 0], [players[index_player2], 0])
+                self.matches.append(match)
+                nb_matches = nb_matches - 1
+                index_player1 = index_player1 + 2
+                index_player2 = index_player2 + 2
 
         else:
-            pass
+            Player.sort_by_total_points(tournament)
 
-        nb_player = len(players)
+            while nb_matches > 0:
+                existing_match = True
+                while existing_match:
+                    players = tournament.players
+                    match = ([players[index_player1], 0], [players[index_player2], 0])
+                    print(Round.is_existing_pair(players[index_player1], players[index_player2], tournament))
 
-        nb_matches = nb_player / 2
-        index_player1 = 0
-        index_player2 = 1
+                    self.matches.append(match)
 
-        #print(tournament.rounds)
-        while nb_matches > 0:
+                    
+                    # Index update
+                    index_player1 = index_player1 + 2
+                    index_player2 = index_player2 + 2
 
-            match = ([players[index_player1], 0], [players[index_player2], 0])
-            
-            if tournament.current_round > 0:
-                print(Round.is_existing_pair(players[index_player1], players[index_player2], tournament))
-            self.matches.append(match)
-
-
-            nb_matches = nb_matches - 1
-            index_player1 = index_player1 + 2
-            index_player2 = index_player2 + 2
-
-    
+                    nb_matches = nb_matches - 1
+                    existing_match = False
+        #print(tournament)
 
     @staticmethod
     def is_existing_pair(player1, player2, tournament):

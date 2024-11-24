@@ -3,7 +3,7 @@
 # empecher creation d'un tournois quand un est en cours
 #empecher ajout de joueur si tournois pas creer
 
-
+ contrôleurs pour accepter les données de l'utilisateur (cahier des charges)
 
 #TODO features
 # matches

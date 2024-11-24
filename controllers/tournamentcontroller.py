@@ -50,7 +50,7 @@ class TournamentController:
         matchview = MatchesView()
         matchview.input_results(tournament)
 
-        Player.sort_by_total_points()
+        #Player.sort_by_total_points(tournament)
 
         print("Classement actuel")
         TournamentView.display_ranking(tournament)
