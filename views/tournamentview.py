@@ -52,7 +52,6 @@ class TournamentView:
                 break
             except ValueError:
                 print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
-
         
         dict_tournament_for_json["rounds_number"] = round_number
         return (dict_tournament_for_json)
