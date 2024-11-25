@@ -12,10 +12,11 @@ class TournamentController:
     def create_tournament(self):
         tournamentview = TournamentView()
         data = tournamentview.get_tournament_input_creation()
+        file_path = "data/tournaments/tournaments.json"
 
-        if os.path.exists("test-tournament.json"):
+        if os.path.exists(file_path):
             # Si le fichier existe, on le charge
-            with open("test-tournament.json", "r") as f:
+            with open(file_path, "r") as f:
                 tournaments = json.load(f)  # Charge les données existantes dans une liste
         else:
             # Si le fichier n'existe pas, on initialise une liste vide
@@ -25,10 +26,10 @@ class TournamentController:
         tournaments.append(data)
 
         # Sauvegarde les données mises à jour dans le fichier JSON
-        with open("test-tournament.json", "w") as f:
+        with open(file_path, "w") as f:
             json.dump(tournaments, f, indent=4)  # On utilise indent pour avoir un fichier lisible
 
-        tournament = Tournament(data["name"], data["location"], data["start_date"], data["rounds_number"])
+        tournament = Tournament(data["name"], data["location"], data["start_date"], data["end_date"], data["rounds_number"])
 
         print("Le tournois a été crée avec succès.")
         print(tournament.name)
@@ -62,3 +63,5 @@ class TournamentController:
             
             if tournament.current_round > tournament.rounds_number:
                 break
+
+

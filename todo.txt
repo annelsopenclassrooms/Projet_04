@@ -9,6 +9,7 @@
 # matches
 # rounds
 
+tester si date de fin pas avant date de debut du tournois
 
 Mentor 21/11
 

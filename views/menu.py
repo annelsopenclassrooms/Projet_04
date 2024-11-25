@@ -12,19 +12,9 @@ class Menu:
             print("2. Tournois")
             print("3. Rapports")
             print("4. Quitter le programme")
-            choice = int(input("choix ?:"))
+            choice = input("choix ?:")
             menu = Menu()
             return (choice)
-
-            match choice:
-                case 1:
-                    menu.add_player_choice_list()
-                case 2:
-                    tournament = menu.tournament_menu()
-                case 3:
-                    pass
-                case 4:
-                    exit()
 
     def tournament_menu(self):
         tournamentview = TournamentView()

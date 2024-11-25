@@ -1,23 +1,66 @@
 from models.tournament import Tournament
-
+from controllers.inputcontroller import InputController
 
 class TournamentView:
     def get_tournament_input_creation(self):
         dict_tournament_for_json = {}
-        dict_tournament_for_json["name"] = input("Nom du tounois ?: ")
-        dict_tournament_for_json["location"] = input("Lieu du tounois ?: ")
-        dict_tournament_for_json["start_date"] = input("Date de début ?: ")
-        dict_tournament_for_json["rounds_number"] = input("Nombre de tours ?: ")
-        return (dict_tournament_for_json)
 
-    def add_player_to_tournament(self, id_chess):
-        pass
+        while True:
+            tournament_name = input("Nom du tounois ?: ")
+            if InputController.is_tournament_name(tournament_name):
+                break
+            else:
+                print("Merci de donner un nom de tournois valide")
+        dict_tournament_for_json["name"] = tournament_name
+        
+        while True:
+            location_name = input("Nom du lieux ?: ")
+            if InputController.is_location_name(location_name):
+                break
+            else:
+                print("Merci de donner un nom de lieu valide")
+
+        dict_tournament_for_json["location"] = location_name
+
+        while True:
+            start_date = input("Date de début ?: ")
+            if InputController.is_date_past(start_date):
+                break
+            else:
+                print("Merci de donner une date valide (JJ/MM/AAAA) et pas dans le futur")
+
+        dict_tournament_for_json["start_date"] = start_date
+
+        while True:
+            end_date = input("Date de fin ?: ")
+            if InputController.is_date(end_date):
+                
+            
+                if end_date < start_date:
+                    print("Le date de fin ne doit pas preceder la date de debut")
+                else:
+                    break
+                
+            else:
+                print("Merci de donner une date valide (JJ/MM/AAAA) et apres ou le jour de la date de debut")
+
+        dict_tournament_for_json["end_date"] = end_date
+
+        while True:
+            try:
+                round_number = int(input("Nombre de tours ?: "))
+                break
+            except ValueError:
+                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+
+        
+        dict_tournament_for_json["rounds_number"] = round_number
+        return (dict_tournament_for_json)
 
     def display_tournament_infos(self, tournament):
         print("tous les tournois (tournamentview, def display tournament info)")
         print(tournament)
 
-    
     def display_ranking(tournament):
         players = tournament.players
         #print(players)
@@ -25,17 +68,3 @@ class TournamentView:
             print(f"{player.last_name} {player.first_name} {player.total_points} points")
 
 
-
-# class TournamentView {
-#     +display_tournament_form()
-#     +display_tournament_list()
-#     +display_tournament_details()
-#     +get_tournament_input()
-# }
-
-        # self.end_date = end_date
-        # self.rounds_number = rounds_number
-        # self.current_round = current_round
-        # self.rounds = rounds
-        # self.players = players
-        # self.description = description
