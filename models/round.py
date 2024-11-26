@@ -40,8 +40,6 @@ class Round:
         index_player1 = 0
         index_player2 = 1
 
-        # TODO if 1er round shuffle et pas de verif paire deja existante
-
         if tournament.current_round == 0:
 
             random.shuffle(players)
@@ -65,24 +63,49 @@ class Round:
 
             wt=0
             while True:
-                print(f"while true Principal {wt}, joueurs restant {len(players_left)}")
+                print(f"round: {tournament.current_round}, while true Principal {wt}, joueurs restant {len(players_left)}")
                 wt = wt + 1
 
-                if len(players_left) == 0:
-                    #print("break")
-                    #print(tournament)
-                    break
+                # if len(players_left) == 0:
+                #     break
 
                 player1 = players_left[0]
                 index_player2 = 0
                 index_same_total = 0
+                index_no_same_total = 0
                 # Player with the same total point
                 same_total = [player for player in players_left if player.total_points == players_left[0].total_points]
                 same_total.remove(players_left[0])
-                while True:
 
+                wt2 = 0
+                while True:
+                    print(f"while true secondaire {wt}")
+                    
                     if len(same_total) == 0:
-                        player2 = players_left[index_player2 + 1]
+                        if len(players_left) == 2:
+                            player2 = players_left[1]
+                            print(f"xxxxxxxxxxxxxx player1: {player1.first_name} VS player2: {player2.first_name}")
+                            players_left.remove(player1)
+                            players_left.remove(player2)      
+                            match = ([player1, 0], [player2, 0])
+                            self.matches.append(match)           
+                            break           
+
+                        else:
+                            if index_no_same_total + 1 == len(players_left):
+                                player2 = players_left[1]
+                                print(f"xxxxxxxxxxxxxx player1: {player1.first_name} VS player2: {player2.first_name}")
+                                players_left.remove(player1)
+                                players_left.remove(player2)      
+                                match = ([player1, 0], [player2, 0])
+                                self.matches.append(match)           
+                                break    
+
+                            else:
+                                print(f"dans len(same total) = 0 et player_left != 2, index_no_same_total + 1: {index_no_same_total + 1}, len(players_left):{len(players_left)}")
+                                player2 = players_left[index_no_same_total + 1]
+                                print(f"xxxxxxxxxxxxxx player1: {player1.first_name} VS player2: {player2.first_name}")
+                                index_no_same_total = index_no_same_total + 1
                     if len(same_total) > 0:
 
                         if (len(same_total)) <= (index_player2):
@@ -90,16 +113,15 @@ class Round:
                             #si plus de possibilite sans prendre pair exsitante
                             if (len(same_total)) <=len(same_total) + index_same_total:
                                 player2 = players_left[1]
+                                print(f"xxxxxxxxxxxxxx player1: {player1.first_name} VS player2: {player2.first_name}")
                                 players_left.remove(player1)
-                                print(player2)
-                                print(players_left)
                                 players_left.remove(player2)
-                                #apres validation
                                 match = ([player1, 0], [player2, 0])
                                 self.matches.append(match)
                                 break
                             else:
                                 player2 = players_left[len(same_total) + index_same_total]
+                                print(f"xxxxxxxxxxxxxx player1: {player1.first_name} VS player2: {player2.first_name}")
 
                         else:
                             print("shuffle")
@@ -107,6 +129,7 @@ class Round:
                             random.shuffle(same_total)
 
                             player2 = same_total[index_player2]
+                            print(f"xxxxxxxxxxxxxx player1: {player1.first_name} VS player2: {player2.first_name}")
 
 
                     print(f"pair is existing: {Round.is_existing_pair(player1, player2, tournament)}")
@@ -116,10 +139,7 @@ class Round:
                         index_same_total = index_same_total + 1
                     else:
                         players_left.remove(player1)
-                        print(player2)
-                        print(players_left)
                         players_left.remove(player2)
-                        #apres validation
                         match = ([player1, 0], [player2, 0])
                         self.matches.append(match)
                         break

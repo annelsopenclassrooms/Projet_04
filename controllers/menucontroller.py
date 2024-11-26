@@ -41,7 +41,7 @@ class MenuController:
         menu = Menu()
 
         if not tournament:
-            print("Merci de crée un tournois avant d'ajouter les joueurs")
+            print("Merci de créer un tournois avant d'ajouter les joueurs")
         else:
             player_in_tournament = []
             while True:

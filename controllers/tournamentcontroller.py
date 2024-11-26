@@ -8,6 +8,7 @@ from models.round import Round
 from models.player import Player
 
 
+
 class TournamentController:
     def create_tournament(self):
         tournamentview = TournamentView()
@@ -61,7 +62,13 @@ class TournamentController:
             # Update current round in tournament
             tournament.current_round = tournament.current_round + 1
             
-            if tournament.current_round > tournament.rounds_number:
+            print (f"Depuis start tournament: round en cours {tournament.current_round}, nombre de tours{tournament.rounds_number}")
+            if tournament.current_round >= tournament.rounds_number:
+
+                for round in tournament.rounds:
+                    for match in round.matches:
+                        print (f"round: {round.name}: {match[0][0].first_name} vs {match[1][0].first_name}")
+
                 break
 
 
