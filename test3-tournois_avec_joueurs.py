@@ -14,19 +14,19 @@ if __name__ == "__main__":
     player2 = Player("David", "David", "12/12/12", "AZ27632786")
     player3 = Player("Anne", "Anne", "12/12/12", "AZ27632786")
     player4 = Player("Noémie", "Noémie", "12/12/12", "AZ27632786")
-    player5 = Player("Juliette", "Juliette", "12/12/12", "AZ27632786")
-    player6 = Player("Clémentine", "Clémentine", "12/12/12", "AZ27632786")
-    player7 = Player("Brian", "Brian", "12/12/12", "AZ27632786")
-    player8 = Player("Tali", "Tali", "12/12/12", "AZ27632786")
+    # player5 = Player("Juliette", "Juliette", "12/12/12", "AZ27632786")
+    # player6 = Player("Clémentine", "Clémentine", "12/12/12", "AZ27632786")
+    # player7 = Player("Brian", "Brian", "12/12/12", "AZ27632786")
+    # player8 = Player("Tali", "Tali", "12/12/12", "AZ27632786")
 
     tournament.players.append(player1)
     tournament.players.append(player2)
     tournament.players.append(player3)
     tournament.players.append(player4)
-    tournament.players.append(player5)
-    tournament.players.append(player6)
-    tournament.players.append(player7)
-    tournament.players.append(player8)
+    # tournament.players.append(player5)
+    # tournament.players.append(player6)
+    # tournament.players.append(player7)
+    # tournament.players.append(player8)
     
 
 

@@ -60,9 +60,9 @@ class TournamentView:
         print("tous les tournois (tournamentview, def display tournament info)")
         print(tournament)
 
-    def display_ranking(tournament):
+    def display_ranking(self, tournament):
         players = tournament.players
-        #print(players)
+        print("Classement actuel:")
         for player in players:
             print(f"{player.last_name} {player.first_name} {player.total_points} points")
 

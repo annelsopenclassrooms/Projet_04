@@ -96,7 +96,10 @@ class MenuController:
             case 2:
                 tournament = MenuController.launch_add_player_menu(tournament)
             case 3:
-                tournament = tournamentcontroller.start_tournament(tournament)
+                while True:
+                    tournament = tournamentcontroller.start_tournament(tournament)
+                    #if tournament.current_round >= tournament.rounds_number:
+                    MenuController.launch_next_round_menu(tournament)
             case 4:
                 tournamentview.display_tournament_infos(tournament)
             case 5:
@@ -104,3 +107,33 @@ class MenuController:
             case _:
                 print("Merci d'entrer un valeur entre 1 et 5")
         return (tournament)
+    
+    def launch_next_round_menu(tournament):
+        menu = Menu()
+        tournamentcontroller = TournamentController()
+        tournamentview = TournamentView()
+
+        while True:
+            while True:
+                try:
+                    choice = int(menu.next_round_menu())
+                    print(f"Merci ! Vous avez entré : {choice}")
+                    break
+                except ValueError:
+                    print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+            
+            match choice:
+
+                # 1. Passer au tour suivant
+                case 1:
+                    return (tournament)
+                # 2. Sauvegarder le tournois   
+                case 2:
+                    tournamentcontroller.save_tournament(tournament)
+                # 3. Afficher le classement actuel    
+                case 3:
+                    tournamentview.display_ranking(tournament)
+                case _:
+                    print("Merci d'entrer un valeur entre 1 et 3")
+            #return (tournament)
+    

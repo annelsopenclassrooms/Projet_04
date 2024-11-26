@@ -26,9 +26,6 @@ class PlayerController:
         print("Le joueur a été ajouté avec succès.")
         return (data)
 
-    def add_player_to_tournament(self):
-        pass
-
     def get_players_list(self):
         # Ouvrir le fichier JSON
         with open('test.json', 'r') as f:

@@ -23,7 +23,6 @@ class Player:
     @staticmethod
     def sort_by_total_points(tournament):
 
-        #print(Tournament.all[0])
         players = tournament.players
 
         sorted_players = sorted(players, key=lambda player: player.total_points, reverse=True)
