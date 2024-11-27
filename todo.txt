@@ -1,7 +1,7 @@
 #TODO corrections: blinder tous les input
 # empecher 2 fois le meme joueurs dans un tournois
 # empecher creation d'un tournois quand un est en cours
-#empecher ajout de joueur si tournois pas creer
+
 
  contrôleurs pour accepter les données de l'utilisateur (cahier des charges)
 
@@ -15,7 +15,7 @@ Mentor 21/11
 
 Faire un diagramme des flux (utilise pour la presentation, a montrer avant de lancer le programme)
 
-* ne pas utiliser des variables a une lettre (les instances !!)
+
 
 * utiliser debugger python pdb
 
@@ -29,4 +29,15 @@ Faire un diagramme des flux (utilise pour la presentation, a montrer avant de la
 
 interdire nb de joueur impaire
 
+
+
+au chargement d'un tournoi indique si il est en cours ou fini avec nb round vs current round
+
+===========
+Fait:
+* ne pas utiliser des variables a une lettre (les instances !!)
+#empecher ajout de joueur si tournois pas creer
+
+===========
+Abandonnés:
 utiliser main pour stocker les instances tournament et le liste des instances de players du tournoi

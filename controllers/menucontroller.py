@@ -97,9 +97,13 @@ class MenuController:
                 tournament = MenuController.launch_add_player_menu(tournament)
             case 3:
                 while True:
-                    tournament = tournamentcontroller.start_tournament(tournament)
-                    #if tournament.current_round >= tournament.rounds_number:
-                    MenuController.launch_next_round_menu(tournament)
+                    if tournament.current_round + 1 >= tournament.rounds_number:
+                        MenuController.launch_end_of_tournament_menu(tournament)
+                        MenuController.launch_main_menu(tournament)
+
+                    else: 
+                        tournament = tournamentcontroller.start_tournament(tournament)
+                        MenuController.launch_next_round_menu(tournament)
             case 4:
                 tournamentview.display_tournament_infos(tournament)
             case 5:
@@ -114,6 +118,13 @@ class MenuController:
         tournamentview = TournamentView()
 
         while True:
+            print(f"current round: {tournament.current_round}")
+            print(f"round number: {tournament.rounds_number}")
+
+            # if tournament.current_round +1 >= tournament.rounds_number:
+            #     print("Le tournoi est fini")
+            #     return(tournament)
+
             while True:
                 try:
                     choice = int(menu.next_round_menu())
@@ -135,5 +146,14 @@ class MenuController:
                     tournamentview.display_ranking(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 3")
+
             #return (tournament)
     
+
+    def launch_end_of_tournament_menu(tournament):
+        print("XXXXXXXXX FIN DU TOURNOIS XXXXXXXXXXXX")
+        tournamentview = TournamentView()
+        tournamentview.display_ranking(tournament)
+        return(tournament)
+
+

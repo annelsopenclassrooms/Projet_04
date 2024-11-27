@@ -8,12 +8,12 @@ from models.player import Player
 
 if __name__ == "__main__":
 
-    tournament = Tournament("nom du tournoi", "Lieux", 12/12/2032, "13/12/2032")
+    tournament = Tournament("YOP", "Lieux", 12/12/2032, "13/12/2032")
 
-    player1 = Player("Vincent", "Vincent", "12/12/12", "AZ27632786")
-    player2 = Player("David", "David", "12/12/12", "AZ27632786")
-    player3 = Player("Anne", "Anne", "12/12/12", "AZ27632786")
-    player4 = Player("Noémie", "Noémie", "12/12/12", "AZ27632786")
+    player1 = Player("Vincent", "Vincent", "01/09/2012", "AZ34333")
+    player2 = Player("David", "David", "12/12/1986", "AZ344322")
+    player3 = Player("Anne", "Anne", "12/12/1979", "AZ1111111")
+    player4 = Player("Noémie", "Noémie", "12/12/2023", "BR5672722")
     # player5 = Player("Juliette", "Juliette", "12/12/12", "AZ27632786")
     # player6 = Player("Clémentine", "Clémentine", "12/12/12", "AZ27632786")
     # player7 = Player("Brian", "Brian", "12/12/12", "AZ27632786")

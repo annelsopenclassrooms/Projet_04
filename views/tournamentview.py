@@ -1,5 +1,7 @@
 from models.tournament import Tournament
 from controllers.inputcontroller import InputController
+import os
+import json
 
 class TournamentView:
     def get_tournament_input_creation(self):
@@ -65,5 +67,19 @@ class TournamentView:
         print("Classement actuel:")
         for player in players:
             print(f"{player.last_name} {player.first_name} {player.total_points} points")
+
+    def list_tournament_from_json(self):
+        file_path = "data/tournaments/tournaments.json"
+
+        if os.path.exists(file_path):
+            # Si le fichier existe, on le charge
+            with open(file_path, "r") as f:
+                tournaments = json.load(f)  # Charge les données existantes dans une liste
+        tournament_number = 1
+        for tournament in tournaments:
+            print (f"{tournament_number}. {tournament['name']} à {tournament['location']} le {tournament['start_date']}")
+            tournament_number = tournament_number + 1
+
+        
 
 
