@@ -5,7 +5,7 @@ from controllers.inputcontroller import InputController
 class PlayerView:
     def get_player_input(self):
         dict_infos = {}
-        
+
         while True:
             last_name = input("Nom de famille du joueur? : ")
             if InputController.is_last_name(last_name):
@@ -25,7 +25,7 @@ class PlayerView:
 
         while True:
             birth_date = input("Date de naissance du joueur? : ")
-            if InputController.is_birth_date(birth_date):
+            if InputController.is_date(birth_date):
                 break
             else:
                 print("Merci de donner une date valide et pas dans le futur")
@@ -33,16 +33,15 @@ class PlayerView:
 
         while True:
             chess_id = input("Identifiant du joueur? : ")
-            if InputController.is_chess_id(chess_id):
+            if InputController.is_valid_id_chess(chess_id):
                 break
             else:
-                print("Merci de donner un identifiant et pas dans le futur")
-      
+                print("Merci de donner un identifiant valide ex:AB12345")
+
         dict_infos["chess_id"] = chess_id
-        
 
         return (dict_infos)
-    
+
     def get_players_list(self):
         file_path = "data/players/players.json"
         # Open file JSON

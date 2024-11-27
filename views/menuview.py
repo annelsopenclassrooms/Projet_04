@@ -1,6 +1,7 @@
 from controllers.playercontroller import PlayerController
 #from controllers.tournamentcontroller import TournamentController
 from views.tournamentview import TournamentView
+from views.playerview import PlayerView
 
 
 class MenuView:
@@ -44,23 +45,21 @@ class MenuView:
         choice = input("choix ?:")
         choice = int(choice)
         print(choice)
-        #menu = Menu()
 
         return(choice)
-            
-  
+
     # choice 1
     def get_player_from_list(self):
         #player_in_tournament = []
         print("liste des joueurs")
-        playercontroller = PlayerController()
-        list = playercontroller.get_players_list()
+        playerview = PlayerView()
+        list = playerview.get_players_list()
         choice = input("choix ?:")
         choice = int(choice) - 1
         print(list[choice])
 
         return (list[choice])
-    
+
     # choice 2
     def get_player_from_chess_id(self):
         chess_id_searched = input("chess id?: ")
@@ -71,7 +70,6 @@ class MenuView:
         else:
             print("joueur non trouvé")
 
-    
     def next_round_menu(self):
         print("Menu tour")
         print("1. Passer au tour suivant")

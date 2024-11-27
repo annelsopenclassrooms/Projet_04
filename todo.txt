@@ -1,5 +1,5 @@
 #TODO corrections: blinder tous les input
-# empecher 2 fois le meme joueurs dans un tournois
+
 # empecher creation d'un tournois quand un est en cours
 
 
@@ -20,7 +20,7 @@ verifier les format de date
 
 
 
-interdire nb de joueur impaire
+interdire nb de joueur impair
 
 
 
@@ -29,7 +29,8 @@ au chargement d'un tournoi indique si il est en cours ou fini avec nb round vs c
 ===========
 Fait:
 * ne pas utiliser des variables a une lettre (les instances !!)
-#empecher ajout de joueur si tournois pas creer
+#empecher ajout de joueur si tournois pas cree
+# empecher 2 fois le meme joueurs dans un tournois
 
 ===========
 Abandonnés:

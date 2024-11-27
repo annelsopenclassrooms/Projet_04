@@ -9,7 +9,6 @@ class PlayerController:
         data = playerview.get_player_input()
         file_path = "data/players/players.json"
 
-
         if os.path.exists(file_path):
             # Si le fichier existe, on le charge
             with open(file_path, "r") as f:
@@ -28,25 +27,6 @@ class PlayerController:
         print("Le joueur a été ajouté avec succès.")
         return (data)
 
-    # def get_players_list(self):
-    #     file_path = "data/players/players.json"
-    #     # Open file JSON
-    #     with open(file_path, 'r') as f:
-    #         # Load JSON in a list
-    #         players = json.load(f)
-
-    #     sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
-
-    #     # Access dictonary in list
-    #     number = 1
-    #     for player in sorted_players:
-            
-    #         print(f'{number}. {player["first_name"]} {player["last_name"]}, date de naissance: {player["birth_date"]}, chess ID: {player["chess_id"]}')
-    #         number = number + 1
-
-    #     # return list of dictionnaries contained in the json file
-    #     return (players)
-    
     def search_chess_id(self, chess_id):
         file_path = "data/players/players.json"
         with open(file_path, 'r') as f:
@@ -58,7 +38,14 @@ class PlayerController:
             if entry.get("chess_id") == chess_id:
                 print(f'La valeur "{chess_id}" a été trouvée dans le dictionnaire: {entry}')
                 return (entry)
-                
+
         if not found:
             print(f'La valeur "{chess_id}" n\'a pas été trouvée.')
-            return(None)
+            return (None)
+
+    def is_player_in_tournament(self, player, tournament):
+
+        # Return True if chess_id found in existing tournament player else false
+
+        chess_id = player["chess_id"]
+        return any(p.chess_id == chess_id for p in tournament.players)

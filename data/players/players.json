@@ -34,5 +34,17 @@
         "first_name": "Vincent",
         "birth_date": "14/43/43",
         "chess_id": "fdfd43333"
+    },
+    {
+        "last_name": "Diener",
+        "first_name": "Aulde",
+        "birth_date": "27/08/1989",
+        "chess_id": "JI75430"
+    },
+    {
+        "last_name": "Martin",
+        "first_name": "Francois",
+        "birth_date": "08/09/2001",
+        "chess_id": "PO74823"
     }
 ]
