@@ -1,6 +1,8 @@
 import json
 import os
 
+from datetime import datetime
+
 from models.tournament import Tournament
 from models.round import Round
 from models.player import Player
@@ -59,6 +61,7 @@ class TournamentController:
     def start_tournament(self, tournament):
 
         round = Round(tournament.current_round)
+        round.start_time = datetime.now().strftime("%d/%m/%Y %H:%M")
         roundcontroller = RoundController()
         roundcontroller.generate_round_matches(tournament, round)
         # Add round to tournament
@@ -68,8 +71,11 @@ class TournamentController:
 
         Player.sort_by_total_points(tournament)
 
+        round.end_time = datetime.now().strftime("%d/%m/%Y %H:%M")
+
         # Update current round in tournament
         tournament.current_round = tournament.current_round + 1
+
 
         return (tournament)
 
@@ -221,3 +227,34 @@ class TournamentController:
         print("Le tournois a été chargé avec succès.")
 
         return (tournament)
+
+    def tournament_status(self, tournament):
+        tournament_ready = True
+        error_code = 0
+
+        if not tournament:
+            print("Il n'existe pas de tournoi à lancer. Merci de crée ou charger un tournoi")
+            tournament_ready = False
+            error_code = 1
+        else:
+            if not tournament.players:
+                print("Pas de joueurs dans le tournois. Merci d'ajouter des joueurs")
+                tournament_ready = False
+                error_code = 2
+            elif len(tournament.players) % 2 != 0:
+                print("Nombre de joueurs impair. Merci d'ajouter un joueur")
+                tournament_ready = False
+                error_code = 3
+
+            # Test if there are still rounds to play
+            if tournament.current_round + 1 >= tournament.rounds_number:
+                print("Le tournoi est terminé")
+                tournament_ready = False
+                error_code = 4
+            print(f"len(tournament.players): {len(tournament.players)}, rounds_number: {tournament.rounds_number}")
+            if len(tournament.players) < tournament.rounds_number:
+                print("Trop de rounds: impossible de n'avoir que des matchs uniques")
+                tournament_ready = False
+                error_code = 5
+
+        return (tournament_ready, error_code)

@@ -1,18 +1,15 @@
-from models.tournament import Tournament
-
 class MatchesView:
-    
+
     # enter all matches resultat from a round
     def input_results(self, tournament):
-        #get matches from the current round
-        print (f"round en cours: {tournament.current_round}")
+        # Get matches from the current round
+        print(f"Tour en cours: {tournament.current_round + 1}")
         matches = tournament.rounds[tournament.current_round].matches
         for match in matches:
-            #print(matches)
-            print ("Qui a gagné le match?")
-            print (f"1. {match[0][0].last_name} {match[0][0].first_name}")
-            print (f"2. {match[1][0].last_name} {match[1][0].first_name}")
-            print (f"3. Egalité")
+            print("Qui a gagné le match?")
+            print(f"1. {match[0][0].last_name} {match[0][0].first_name}")
+            print(f"2. {match[1][0].last_name} {match[1][0].first_name}")
+            print("3. Egalité")
 
             choice = input("choix ?:")
             choice = int(choice)

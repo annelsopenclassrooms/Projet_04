@@ -54,9 +54,13 @@ class PlayerView:
         # Access dictonary in list
         number = 1
         for player in sorted_players:
-            
-            print(f'{number}. {player["first_name"]} {player["last_name"]}, date de naissance: {player["birth_date"]}, chess ID: {player["chess_id"]}')
+
+            print(
+                f"{number}. {player['first_name']} {player['last_name']}, "
+                f"date de naissance: {player['birth_date']}, "
+                f"chess ID: {player['chess_id']}"
+                )
             number = number + 1
 
-        # return list of dictionnaries contained in the json file
-        return (players)
+        # Return list of dictionnaries contained in the json file
+        return (sorted_players)

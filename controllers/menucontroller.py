@@ -105,28 +105,51 @@ class MenuController:
                     print(f"Merci ! Vous avez entré : {choice}")
                     break
                 except ValueError:
-                    print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                    print("ERREUR: ce n'est pas un entier valide. Veuillez réessayer.")
 
             match choice:
                 # 1. Charger un tournois
+
                 case 1:
-                    tournament = tournamentcontroller.load_tournament()
+                    if tournament:
+                        print(
+                            "ERREUR: Un tournoi est déjà chargé. "
+                            "Merci de quitter le logiciel si vous souhaitez en charger un autre."
+                            )
+                    else:
+                        tournament = tournamentcontroller.load_tournament()
                 # 2. Creer un tournois
                 case 2:
-                    tournament = tournamentcontroller.create_tournament()
+                    if tournament:
+
+                        print(
+                            "ERREUR: Un tournoi est déjà chargé. "
+                            "Merci de quitter le logiciel si vous souhaitez en charger un autre."
+                            )
+                    else:
+                        tournament = tournamentcontroller.create_tournament()
                 # 3. Ajouter des joueurs au tournois
                 case 3:
                     tournament = MenuController.launch_add_player_menu(tournament)
                 # 4. Lancer le tournois
                 case 4:
-                    while True:
-                        if tournament.current_round + 1 >= tournament.rounds_number:
-                            MenuController.launch_end_of_tournament_menu(tournament)
-                            MenuController.launch_main_menu(tournament)
 
-                        else:
-                            tournament = tournamentcontroller.start_tournament(tournament)
-                            MenuController.launch_next_round_menu(tournament)
+                    tournament_status = tournamentcontroller.tournament_status(tournament)
+
+                    if tournament_status[0]:
+                        # Tournament ready
+                        while True:
+                            if tournament.current_round + 1 >= tournament.rounds_number:
+                                MenuController.launch_end_of_tournament_menu(tournament)
+                                MenuController.launch_main_menu(tournament)
+
+                            else:
+                                tournament = tournamentcontroller.start_tournament(tournament)
+                                MenuController.launch_next_round_menu(tournament)
+
+                    else:
+                        print("Merci de corriger le problème avant de lancer le tournois")
+
                 # 5. Afficher les infos du tournois
                 case 5:
                     tournamentview.display_tournament_infos(tournament)
@@ -243,3 +266,4 @@ class MenuController:
                     MenuController.launch_rapport_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 3")
+

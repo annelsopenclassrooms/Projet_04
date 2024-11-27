@@ -1,6 +1,4 @@
 from controllers.playercontroller import PlayerController
-#from controllers.tournamentcontroller import TournamentController
-from views.tournamentview import TournamentView
 from views.playerview import PlayerView
 
 
@@ -14,29 +12,23 @@ class MenuView:
             print("3. Rapports")
             print("4. Quitter le programme")
             choice = input("choix ?:")
-            
+
             return (choice)
 
     def tournament_menu(self):
-        #tournamentview = TournamentView()
-        #while True:
+
         print("Menu tournois")
         print("1. Charger un tournois")
         print("2. Creer un tournois")
         print("3. Ajouter des joueurs au tournois")
-        print("4. Lancer le tournois")
+        print("4. Lancer/reprendre le tournois")
         print("5. Afficher les infos du tournois")
         print("6. Retour")
         choice = input("choix ?:")
         return (choice)
 
     def add_player_choice_list(self):
-        # TODO: faire en sorte que player_in_tournament ne soit pas ecraser si on retourne dans le menu
-        # verifier avant ajout au dictionnaire que le joueur n'est pas deja dans la liste
-        #player_in_tournament = []
-        #while True:
-            
-            #print (player_in_tournament)
+
         print("Ajouter un joueur au tournois:")
         print("1. Depuis la liste des joueurs existants")
         print("2. Depuis son chess ID")
@@ -46,19 +38,29 @@ class MenuView:
         choice = int(choice)
         print(choice)
 
-        return(choice)
+        return (choice)
 
     # choice 1
     def get_player_from_list(self):
-        #player_in_tournament = []
         print("liste des joueurs")
         playerview = PlayerView()
-        list = playerview.get_players_list()
-        choice = input("choix ?:")
-        choice = int(choice) - 1
-        print(list[choice])
+        players = playerview.get_players_list()
 
-        return (list[choice])
+        while True:
+            try:
+                choice = int(input("choix ?:"))
+                print(f"Merci ! Vous avez entré : {choice}")
+                if len(players) < choice or choice == 0:
+                    print("Merci d'entrer un valeur existante")
+                else:
+                    break
+            except ValueError:
+                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+
+        choice = choice - 1
+        print(f"Vous avez ajouté {players[choice]['first_name']} {players[choice]['last_name']}")
+
+        return (players[choice])
 
     # choice 2
     def get_player_from_chess_id(self):
@@ -68,7 +70,7 @@ class MenuView:
         if result:
             return (result)
         else:
-            print("joueur non trouvé")
+            print("Joueur non trouvé")
 
     def next_round_menu(self):
         print("Menu tour")
@@ -88,7 +90,7 @@ class MenuView:
 
         choice = input("choix ?:")
         return (choice)
-    
+
     def rapport_tournament_menu(self):
         print("Menu rapport tournois")
         print("1. Nom et dates du tournoi donné")
@@ -98,4 +100,3 @@ class MenuView:
 
         choice = input("choix ?:")
         return (choice)
-

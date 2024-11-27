@@ -1,36 +1,53 @@
-#TODO corrections: blinder tous les input
-
-# empecher creation d'un tournois quand un est en cours
 
 
- contrôleurs pour accepter les données de l'utilisateur (cahier des charges)
 
+
+empecher 3. Ajouter des joueurs au tournois
+si le tournoi a deja au moins un round de passé
+
+blinder tous les input
+
+ajouter retour à tous les menu
+
+prevenir si deequilibre nb joueur/tour => ok
+proposer de mofier le nb de tour ?
+==========================
+options: Faire des jolis menu
+
+♜♞♝♛♚♝♞♜
+♟♟♟♟♟♟♟♟
+□■□■□■□■
+■□■□■□■□
+□■□■□■□■
+■□■□■□■□
+♙♙♙♙♙♙♙♙
+♖♘♗♕♔♗♘♖
+
+option: save rapport csv
+===========
+Fait:
+
+input controller et correspondance chiffre et joueur selectionner
+sort les object joueur par ordre alphabetique avant de les lister (sinon pas de correspondance dans la selectrion)
+mettre une phrase: vous avez ajouté :3nom
+
+status tournament
+    *interdire nb de joueur impair
+    Verifier ajout joueur 
+    au chargement d'un tournoi indique si il est en cours ou fini avec nb round vs current round
+verifier les format de date
+tester si date de fin pas avant date de debut du tournois
+date de fin round
 #TODO features
 # matches
 # rounds
-
-tester si date de fin pas avant date de debut du tournois
-
-
-
-option: save rapport csv
-
-verifier les format de date
-
-
-
-
-interdire nb de joueur impair
-
-
-
-au chargement d'un tournoi indique si il est en cours ou fini avec nb round vs current round
-
-===========
-Fait:
 * ne pas utiliser des variables a une lettre (les instances !!)
 #empecher ajout de joueur si tournois pas cree
 # empecher 2 fois le meme joueurs dans un tournois
+# empecher creation d'un tournois quand un est en cours
+#empecher de charger un tournoi si un est deja chargé
+
+ contrôleurs pour accepter les données de l'utilisateur (cahier des charges)
 
 ===========
 Abandonnés:
