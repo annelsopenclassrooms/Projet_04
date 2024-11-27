@@ -1,3 +1,4 @@
+import json
 from controllers.inputcontroller import InputController
 
 
@@ -41,3 +42,22 @@ class PlayerView:
         
 
         return (dict_infos)
+    
+    def get_players_list(self):
+        file_path = "data/players/players.json"
+        # Open file JSON
+        with open(file_path, 'r') as f:
+            # Load JSON in a list
+            players = json.load(f)
+
+        sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
+
+        # Access dictonary in list
+        number = 1
+        for player in sorted_players:
+            
+            print(f'{number}. {player["first_name"]} {player["last_name"]}, date de naissance: {player["birth_date"]}, chess ID: {player["chess_id"]}')
+            number = number + 1
+
+        # return list of dictionnaries contained in the json file
+        return (players)

@@ -11,20 +11,13 @@
 
 tester si date de fin pas avant date de debut du tournois
 
-Mentor 21/11
-
-Faire un diagramme des flux (utilise pour la presentation, a montrer avant de lancer le programme)
 
 
+option: save rapport csv
 
-* utiliser debugger python pdb
+verifier les format de date
 
-* je peux faire une fonction save dans les modes 
-    Tournament
-        def save
-        def read
 
-    Sous forme d'heritage des class abstraite pour save et read
 
 
 interdire nb de joueur impaire
@@ -41,3 +34,5 @@ Fait:
 ===========
 Abandonnés:
 utiliser main pour stocker les instances tournament et le liste des instances de players du tournoi
+
+

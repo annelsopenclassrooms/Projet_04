@@ -3,7 +3,7 @@ from controllers.playercontroller import PlayerController
 from views.tournamentview import TournamentView
 
 
-class Menu:
+class MenuView:
 
     def main_menu(self):
         while True:
@@ -53,8 +53,8 @@ class Menu:
     def get_player_from_list(self):
         #player_in_tournament = []
         print("liste des joueurs")
-        p = PlayerController()
-        list = p.get_players_list()
+        playercontroller = PlayerController()
+        list = playercontroller.get_players_list()
         choice = input("choix ?:")
         choice = int(choice) - 1
         print(list[choice])
@@ -81,6 +81,23 @@ class Menu:
         choice = input("choix ?:")
         return (choice)
 
-    # def load_tournament_menu(self):
-    #     tournamentview = TournamentView()
-    #     tournamentview.list_tournament_from_json(self)
+    def rapport_menu(self):
+        print("Menu rapports")
+        print("1. Liste de tous les joueurs par ordre alphabétique")
+        print("2. Liste de tous les tournois")
+        print("3. Détails d'un tournois")
+        print("4. Retour")
+
+        choice = input("choix ?:")
+        return (choice)
+    
+    def rapport_tournament_menu(self):
+        print("Menu rapport tournois")
+        print("1. Nom et dates du tournoi donné")
+        print("2. Liste des joueurs du tournoi par ordre alphabétique")
+        print("3. Liste de tous les tours du tournoi et de tous les matchs du tour")
+        print("4. Retour")
+
+        choice = input("choix ?:")
+        return (choice)
+

@@ -7,10 +7,12 @@ class PlayerController:
     def create_player(self):
         playerview = PlayerView()
         data = playerview.get_player_input()
+        file_path = "data/players/players.json"
 
-        if os.path.exists("test.json"):
+
+        if os.path.exists(file_path):
             # Si le fichier existe, on le charge
-            with open("test.json", "r") as f:
+            with open(file_path, "r") as f:
                 players = json.load(f)  # Charge les données existantes dans une liste
         else:
             # Si le fichier n'existe pas, on initialise une liste vide
@@ -20,33 +22,34 @@ class PlayerController:
         players.append(data)
 
         # Sauvegarde les données mises à jour dans le fichier JSON
-        with open("test.json", "w") as f:
+        with open(file_path, "w") as f:
             json.dump(players, f, indent=4)  # On utilise indent pour avoir un fichier lisible
 
         print("Le joueur a été ajouté avec succès.")
         return (data)
 
-    def get_players_list(self):
-        # Ouvrir le fichier JSON
-        with open('test.json', 'r') as f:
-            # Charger les données JSON dans une liste
-            data = json.load(f)
+    # def get_players_list(self):
+    #     file_path = "data/players/players.json"
+    #     # Open file JSON
+    #     with open(file_path, 'r') as f:
+    #         # Load JSON in a list
+    #         players = json.load(f)
 
-        # Afficher les données (qui sont une liste de dictionnaires)
-        #print(data)
+    #     sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
 
-        # Accéder à chaque dictionnaire dans la liste
-        number = 1
-        for dict in data:
+    #     # Access dictonary in list
+    #     number = 1
+    #     for player in sorted_players:
             
-            print(f'{number}. {dict["first_name"]} {dict["last_name"]}, date de naissance: {dict["birth_date"]}, chess ID: {dict["chess_id"]}')
-            number = number + 1
+    #         print(f'{number}. {player["first_name"]} {player["last_name"]}, date de naissance: {player["birth_date"]}, chess ID: {player["chess_id"]}')
+    #         number = number + 1
 
-        # return list of dictionnaries contained in the json file
-        return (data)
+    #     # return list of dictionnaries contained in the json file
+    #     return (players)
     
     def search_chess_id(self, chess_id):
-        with open('test.json', 'r') as f:
+        file_path = "data/players/players.json"
+        with open(file_path, 'r') as f:
             data = json.load(f)
 
         found = False

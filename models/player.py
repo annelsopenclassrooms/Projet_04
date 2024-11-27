@@ -1,6 +1,3 @@
-from models.tournament import Tournament
-
-
 class Player:
     all = []
     def __init__(self, last_name, first_name, birth_date, chess_id, total_points: float = 0.0):

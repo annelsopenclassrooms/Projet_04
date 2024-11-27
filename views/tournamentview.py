@@ -80,6 +80,46 @@ class TournamentView:
             print (f"{tournament_number}. {tournament['name']} à {tournament['location']} le {tournament['start_date']}")
             tournament_number = tournament_number + 1
 
-        
+    def display_tournament_name_date(self, number):
+        file_path = "data/tournaments/tournaments.json"
 
+        if os.path.exists(file_path):
+            # Si le fichier existe, on le charge
+            with open(file_path, "r") as f:
+                tournaments = json.load(f)  # Charge les données existantes dans une liste
+        tournament_number = 1
+        for tournament in tournaments:
+            print (f"{tournament_number}. {tournament['name']} à {tournament['location']}")
+            tournament_number = tournament_number + 1
+    
+    def display_tournament_players_list(self, number):
 
+        print("fonction display_tournament_players_list")
+        file_path = "data/tournaments/tournaments.json"
+
+        if os.path.exists(file_path):
+            # Si le fichier existe, on le charge
+            with open(file_path, "r") as f:
+                tournaments = json.load(f)  # Charge les données existantes dans une liste
+
+        #print(tournaments[number - 1])
+
+        for player in tournaments[number - 1]["players"]:
+          
+            print(f"{player['first_name']}{player['last_name']}")
+
+    # 3. Liste de tous les tours du tournoi et de tous les matchs du tour
+    def display_tournament_rounds(self, number):
+        file_path = "data/tournaments/tournaments.json"
+
+        if os.path.exists(file_path):
+            # Si le fichier existe, on le charge
+            with open(file_path, "r") as f:
+                tournaments = json.load(f)  # Charge les données existantes dans une liste
+
+        round_number = 1
+        for round in tournaments[number - 1]["rounds"]:
+            print (f"Tour: {round_number}")
+            for match in round["matches"]:
+                print(f"{match[0]['first_name']} {match[0]['last_name']}, points: {match[0]['match_points']} VS {match[1]['first_name']} {match[1]['last_name']}, points: {match[1]['match_points']}")
+            round_number = round_number + 1

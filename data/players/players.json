@@ -1,39 +1,27 @@
 [
     {
-        "last_name": "Anne",
-        "first_name": "LS",
+        "last_name": "Le Ster",
+        "first_name": "Anne",
         "birth_date": "25/08/1999",
         "chess_id": "AB12341"
     },
     {
-        "last_name": "Eric",
-        "first_name": "Sergine",
+        "last_name": "Sergine",
+        "first_name": "Eric",
         "birth_date": "25/08/1999",
         "chess_id": "AB12345"
     },
     {
-        "last_name": "David",
-        "first_name": "Heim",
+        "last_name": "Muller",
+        "first_name": "David",
         "birth_date": "25/08/1999",
         "chess_id": "AB12346"
     },
     {
-        "last_name": "thomas",
-        "first_name": "meyer",
+        "last_name": "Meyer",
+        "first_name": "Thomas",
         "birth_date": "25/08/1999",
         "chess_id": "AB12347"
-    },
-    {
-        "last_name": "Dupont",
-        "first_name": "Christine",
-        "birth_date": "23/32/32",
-        "chess_id": "az123400"
-    },
-    {
-        "last_name": "Claire",
-        "first_name": "Damasio",
-        "birth_date": "23/09/1998",
-        "chess_id": "GH12345"
     },
     {
         "last_name": "Valentin",
@@ -46,11 +34,5 @@
         "first_name": "Vincent",
         "birth_date": "14/43/43",
         "chess_id": "fdfd43333"
-    },
-    {
-        "last_name": "Chatoune",
-        "first_name": "Perle",
-        "birth_date": "2023",
-        "chess_id": "miaou123"
     }
 ]

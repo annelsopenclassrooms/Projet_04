@@ -1,9 +1,3 @@
-from datetime import datetime
-import random
-from models.player import Player
-from models.tournament import Tournament
-
-
 class Round:
     all = []
 

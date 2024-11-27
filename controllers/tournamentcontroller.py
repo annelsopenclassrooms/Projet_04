@@ -1,10 +1,13 @@
 import json
 import os
-from views.tournamentview import TournamentView
-from views.matchesview import MatchesView
+
 from models.tournament import Tournament
 from models.round import Round
 from models.player import Player
+
+from views.tournamentview import TournamentView
+from views.matchesview import MatchesView
+
 from controllers.roundcontroller import RoundController
 
 
@@ -47,12 +50,10 @@ class TournamentController:
 
     def start_tournament(self, tournament):
 
-        #while True:
-        #menucontroller = MenuController()
         round = Round(tournament.current_round)
         roundcontroller = RoundController()
         roundcontroller.generate_round_matches(tournament, round)
-        # add round to tournament
+        # Add round to tournament
         tournament.rounds.append(round)
         matchview = MatchesView()
         matchview.input_results(tournament)
@@ -61,9 +62,8 @@ class TournamentController:
 
         # Update current round in tournament
         tournament.current_round = tournament.current_round + 1
-         
-        return(tournament)
 
+        return (tournament)
 
     def save_tournament(self, tournament):
 
@@ -85,8 +85,8 @@ class TournamentController:
             round_to_dict["name"] = round.name
             round_to_dict["start_time"] = round.start_time
             round_to_dict["end_time"] = round.end_time
-            
-            #prepare matches to be stored in a list
+
+            # Prepare matches to be stored in a list
             matches = []
             for match in round.matches:
                 player1_to_dict = {}
@@ -100,13 +100,13 @@ class TournamentController:
                 player1_to_dict["total_points"] = match[0][0].total_points
                 player1_to_dict["match_points"] = match[0][1]
 
-
                 player2_to_dict["last_name"] = match[1][0].last_name
                 player2_to_dict["first_name"] = match[1][0].first_name
                 player2_to_dict["birth_date"] = match[1][0].birth_date
                 player2_to_dict["chess_id"] = match[1][0].chess_id
                 player2_to_dict["total_points"] = match[1][0].total_points
                 player2_to_dict["match_points"] = match[1][1]
+
                 matches.append([player1_to_dict, player2_to_dict])
 
             round_to_dict["matches"] = matches
@@ -157,9 +157,6 @@ class TournamentController:
             except ValueError:
                 print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
 
-        #recuperer le number choisi dans la liste
-        #tournament_number = 5
-
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
@@ -167,20 +164,9 @@ class TournamentController:
             with open(file_path, "r") as f:
                 tournaments = json.load(f)  # Charge les données existantes dans une liste
         else:
-            print ("Aucun tournois sauvegardés")
-            return(None)
-
-
-        print(tournaments)    
+            print("Aucun tournois sauvegardés")
+            return (None)
         players = []
-
-
-# if 'players' in tournaments[tournament_number - 1] and tournaments[tournament_number - 1]['players']:
-#     # La clé 'players' existe et n'est pas vide
-#     print("Liste des joueurs :", tournaments[tournament_number - 1]['players'])
-# else:
-#     print("Pas de joueurs disponibles pour ce tournoi.")
-
 
         if 'players' in tournaments[tournament_number - 1] and tournaments[tournament_number - 1]['players']:
             players_in_tournament = tournaments[tournament_number - 1]['players']
@@ -191,9 +177,9 @@ class TournamentController:
         if 'rounds' in tournaments[tournament_number - 1] and tournaments[tournament_number - 1]['rounds']:
 
             rounds_in_tournament = tournaments[tournament_number - 1]['rounds']
-            #print(rounds_in_tournament)
+
             for round in rounds_in_tournament:
-                #get matches
+                # Get matches
                 matches = []
                 for match in round["matches"]:
 
@@ -208,9 +194,7 @@ class TournamentController:
                     #player2 = [player for player in players if player.chess_id == chess_id_player2]
                     player2 = next((player for player in players if player.chess_id == chess_id_player2), None)
 
-
                     match_to_add = ([player1, match[0]['match_points']], [player2, match[1]['match_points']])
-                    
                     matches.append(match_to_add)
 
                 round_to_add = Round(round["name"])
@@ -218,17 +202,12 @@ class TournamentController:
                 round_to_add.end_time = round["end_time"]
                 round_to_add.matches = matches
 
-                print (f"round_to_add : {round_to_add}")
-
                 rounds.append(round_to_add)
 
-
         tournament = Tournament(tournaments[tournament_number - 1]['name'], tournaments[tournament_number - 1]['location'], tournaments[tournament_number - 1]['start_date'],
-                                tournaments[tournament_number - 1]['end_date'], tournaments[tournament_number - 1]['rounds_number'], tournaments[tournament_number - 1]['current_round'], rounds, players, tournaments[tournament_number - 1]['description'], )
-        
+                                tournaments[tournament_number - 1]['end_date'], tournaments[tournament_number - 1]['rounds_number'],
+                                tournaments[tournament_number - 1]['current_round'], rounds, players, tournaments[tournament_number - 1]['description'], )
+
         print("Le tournois a été chargé avec succès.")
-        print(tournament)
 
         return (tournament)
-
-

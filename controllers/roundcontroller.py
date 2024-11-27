@@ -1,10 +1,12 @@
 import json
 import os
-from models.round import Round
-from datetime import datetime
 import random
+
+from datetime import datetime
+
 from models.player import Player
 from models.tournament import Tournament
+from models.round import Round
 
 
 class RoundController:

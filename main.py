@@ -1,6 +1,6 @@
 from controllers.playercontroller import PlayerController
 from controllers.tournamentcontroller import TournamentController
-from views.menu import Menu
+
 from views.tournamentview import TournamentView
 from controllers.menucontroller import MenuController
 
@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     tournament = None
 
-    menu = Menu()
+    #menumenuview = MenuView()
     menucontroller = MenuController()
     while True:
 
