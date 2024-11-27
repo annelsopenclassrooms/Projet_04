@@ -89,13 +89,19 @@ class MenuController:
                 break
             except ValueError:
                 print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
-        
+
         match choice:
+            # 1. Charger un tournois    
             case 1:
-                tournament = tournamentcontroller.create_tournament()
+                tournament = tournamentcontroller.load_tournament()
+            # 2. Creer un tournois
             case 2:
-                tournament = MenuController.launch_add_player_menu(tournament)
+                tournament = tournamentcontroller.create_tournament()
+            # 3. Ajouter des joueurs au tournois    
             case 3:
+                tournament = MenuController.launch_add_player_menu(tournament)
+            # 4. Lancer le tournois
+            case 4:
                 while True:
                     if tournament.current_round + 1 >= tournament.rounds_number:
                         MenuController.launch_end_of_tournament_menu(tournament)
@@ -104,12 +110,15 @@ class MenuController:
                     else: 
                         tournament = tournamentcontroller.start_tournament(tournament)
                         MenuController.launch_next_round_menu(tournament)
-            case 4:
-                tournamentview.display_tournament_infos(tournament)
+            # 5. Afficher les infos du tournois
             case 5:
+                tournamentview.display_tournament_infos(tournament)
+            
+            # 6. Retour
+            case 6:
                 menu.main_menu()
             case _:
-                print("Merci d'entrer un valeur entre 1 et 5")
+                print("Merci d'entrer un valeur entre 1 et 6")
         return (tournament)
     
     def launch_next_round_menu(tournament):

@@ -84,20 +84,6 @@
         "description": ""
     },
     {
-        "name": "Super chess 2000",
-        "location": "Lune",
-        "start_date": "12/12/2012",
-        "end_date": "13/12/2012",
-        "rounds_number": 3
-    },
-    {
-        "name": "Ouaip",
-        "location": "Ici",
-        "start_date": "12/12/2023",
-        "end_date": "14/12/2023",
-        "rounds_number": 3
-    },
-    {
         "name": "DSsssdsq",
         "location": "Dsqsqd",
         "start_date": "12/12/2023",
@@ -392,6 +378,17 @@
                 "total_points": 0.5
             }
         ],
+        "description": ""
+    },
+    {
+        "name": "Party time",
+        "location": "Denver",
+        "start_date": "12/12/2023",
+        "end_date": "13/12/2023",
+        "rounds_number": 5,
+        "current_round": 0,
+        "rounds": [],
+        "players": [],
         "description": ""
     }
 ]

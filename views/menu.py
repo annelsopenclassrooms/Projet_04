@@ -1,6 +1,6 @@
 from controllers.playercontroller import PlayerController
 #from controllers.tournamentcontroller import TournamentController
-#from views.tournamentview import TournamentView
+from views.tournamentview import TournamentView
 
 
 class Menu:
@@ -20,11 +20,12 @@ class Menu:
         #tournamentview = TournamentView()
         #while True:
         print("Menu tournois")
-        print("1. Creer un tournois")
-        print("2. Ajouter des joueurs au tournois")
-        print("3. Lancer le tournois")
-        print("4. Afficher les infos du tournois")
-        print("5. Retour")
+        print("1. Charger un tournois")
+        print("2. Creer un tournois")
+        print("3. Ajouter des joueurs au tournois")
+        print("4. Lancer le tournois")
+        print("5. Afficher les infos du tournois")
+        print("6. Retour")
         choice = input("choix ?:")
         return (choice)
 
@@ -80,3 +81,6 @@ class Menu:
         choice = input("choix ?:")
         return (choice)
 
+    # def load_tournament_menu(self):
+    #     tournamentview = TournamentView()
+    #     tournamentview.list_tournament_from_json(self)

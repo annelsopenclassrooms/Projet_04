@@ -34,13 +34,15 @@ class TournamentController:
         print("Le tournois a été crée avec succès.")
         print(tournament.name)
 
+        self.save_tournament(tournament)    
         return (tournament)
 
     def instantiate_players(self, players, tournament):
 
         # Création des objets et récupération dans une liste
         players_in_tournament = [Player(**data) for data in players]
-        tournament.players = players_in_tournament
+        #tournament.players = players_in_tournament
+        tournament.players.append(players_in_tournament)
         return (players_in_tournament)
 
     def start_tournament(self, tournament):
@@ -77,6 +79,7 @@ class TournamentController:
 
         # Prepare rounds to be stored in a list of dictionnaries
         rounds = []
+        players = []
         for round in tournament.rounds:
             round_to_dict = {}
             round_to_dict["name"] = round.name
@@ -146,10 +149,16 @@ class TournamentController:
         tournamentview = TournamentView()
         tournamentview.list_tournament_from_json()
         
-
+        while True:
+            try:
+                tournament_number = int(input("Choisissez le tournois à charger: "))
+                print(f"Merci ! Vous avez entré : {tournament_number}")
+                break
+            except ValueError:
+                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
 
         #recuperer le number choisi dans la liste
-        tournament_number = 5
+        #tournament_number = 5
 
         file_path = "data/tournaments/tournaments.json"
 
@@ -161,58 +170,65 @@ class TournamentController:
             print ("Aucun tournois sauvegardés")
             return(None)
 
-        players_in_tournament = tournaments[tournament_number - 1]['players']
-        rounds_in_tournament = tournaments[tournament_number - 1]['rounds']
-        
+
+        print(tournaments)    
         players = []
-        for player in players_in_tournament:
-            players.append(Player(player["last_name"], player["first_name"], player["birth_date"], player["chess_id"], player["total_points"]))
-            
+
+
+# if 'players' in tournaments[tournament_number - 1] and tournaments[tournament_number - 1]['players']:
+#     # La clé 'players' existe et n'est pas vide
+#     print("Liste des joueurs :", tournaments[tournament_number - 1]['players'])
+# else:
+#     print("Pas de joueurs disponibles pour ce tournoi.")
+
+
+        if 'players' in tournaments[tournament_number - 1] and tournaments[tournament_number - 1]['players']:
+            players_in_tournament = tournaments[tournament_number - 1]['players']
+            for player in players_in_tournament:
+                players.append(Player(player["last_name"], player["first_name"], player["birth_date"], player["chess_id"], player["total_points"]))
+
         rounds = []
-        #print(rounds_in_tournament)
-        for round in rounds_in_tournament:
-            #get matches
-            matches = []
-            for match in round["matches"]:
+        if 'rounds' in tournaments[tournament_number - 1] and tournaments[tournament_number - 1]['rounds']:
 
-                # Trouver tous les objets avec un nom donné
-                
-                chess_id_player1 = match[0]['chess_id']
-                chess_id_player2 = match[1]['chess_id']
-                player1 = [player for player in players if player.chess_id == chess_id_player1]
-                player2 = [player for player in players if player.chess_id == chess_id_player2]
+            rounds_in_tournament = tournaments[tournament_number - 1]['rounds']
+            #print(rounds_in_tournament)
+            for round in rounds_in_tournament:
+                #get matches
+                matches = []
+                for match in round["matches"]:
 
-                #print(player1)
+                    print("nouveau match")
 
-                match_to_add = ((player1, match[0]['match_points']), (player2, match[1]['match_points']))
-                matches.append(match_to_add)
+                    # Trouver tous les objets avec un nom donné
 
-            #print(matches)
-
-            round_to_add = Round(round["name"])
-            round_to_add.start_time = round["start_time"]
-            round_to_add.end_time = round["end_time"]
-            round_to_add.matches = round["matches"]
-
-            print (round_to_add)
-
-            rounds.append(round_to_add)
-                    #self.name = name
-                   # self.start_time = datetime.now().isoformat()
-               # self.end_time = 0
-                  # self.matches = []
-        #print(rounds)
+                    chess_id_player1 = match[0]['chess_id']
+                    chess_id_player2 = match[1]['chess_id']
+                    #player1 = [player for player in players if player.chess_id == chess_id_player1]
+                    player1 = next((player for player in players if player.chess_id == chess_id_player1), None)
+                    #player2 = [player for player in players if player.chess_id == chess_id_player2]
+                    player2 = next((player for player in players if player.chess_id == chess_id_player2), None)
 
 
-                
-               
+                    match_to_add = ([player1, match[0]['match_points']], [player2, match[1]['match_points']])
+                    
+                    matches.append(match_to_add)
+
+                round_to_add = Round(round["name"])
+                round_to_add.start_time = round["start_time"]
+                round_to_add.end_time = round["end_time"]
+                round_to_add.matches = matches
+
+                print (f"round_to_add : {round_to_add}")
+
+                rounds.append(round_to_add)
 
 
-        #tournament = Tournament(data["name"], data["location"], data["start_date"], data["end_date"], data["rounds_number"])
-        #print(players)
+        tournament = Tournament(tournaments[tournament_number - 1]['name'], tournaments[tournament_number - 1]['location'], tournaments[tournament_number - 1]['start_date'],
+                                tournaments[tournament_number - 1]['end_date'], tournaments[tournament_number - 1]['rounds_number'], tournaments[tournament_number - 1]['current_round'], rounds, players, tournaments[tournament_number - 1]['description'], )
+        
         print("Le tournois a été chargé avec succès.")
-        #print(tournament)
+        print(tournament)
 
-        #return (tournament)
+        return (tournament)
 
 
