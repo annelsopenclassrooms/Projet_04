@@ -1,6 +1,17 @@
+Afficher les info de tounrois proprement (pour l'instant juste objet)
 
+Utiliser pretty print (sauter des lignes pour plus de visibilité)
 
+Verifier les rapports
+nom et lieux ne marche pas ?
+formatage des sorties
+liste de joueur mettre un espace
 
+verfier affichage de tous les round et matchs
+
+Nous devons pouvoir sauvegarder et charger l'état du programme à tout moment entre
+deux actions de l'utilisateur.=> charger en cours de round
+=>sauvegarde auto apres chaque modif du tournois
 
 empecher 3. Ajouter des joueurs au tournois
 si le tournoi a deja au moins un round de passé
@@ -12,7 +23,12 @@ ajouter retour à tous les menu
 prevenir si deequilibre nb joueur/tour => ok
 proposer de mofier le nb de tour ?
 ==========================
-options: Faire des jolis menu
+options: 
+export htlm, utiliser fstring
+
+Grosse option: transformé match en objet
+
+Faire des jolis menu
 
 ♜♞♝♛♚♝♞♜
 ♟♟♟♟♟♟♟♟

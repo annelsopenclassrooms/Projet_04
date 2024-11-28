@@ -1,4 +1,5 @@
 
+from rich import print
 from views.tournamentview import TournamentView
 from views.menuview import MenuView
 from views.playerview import PlayerView
@@ -17,7 +18,7 @@ class MenuController:
                 print(f"Merci ! Vous avez entré : {choice}")
                 break
             except ValueError:
-                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
         match choice:
             # 1. Creer des joueurs
@@ -34,7 +35,7 @@ class MenuController:
             case 4:
                 exit()
             case _:
-                print("Merci d'entre un valeur comprise entre 1 et 4")
+                print("[red]ERREUR: Merci d'entre un valeur comprise entre 1 et 4[/red]")
         return (tournament)
 
     @staticmethod
@@ -44,7 +45,7 @@ class MenuController:
         playercontroller = PlayerController()
 
         if not tournament:
-            print("Merci de créer un tournois avant d'ajouter les joueurs")
+            print("[red]ERREUR: Merci de créer un tournois avant d'ajouter les joueurs[/red]")
         else:
             while True:
 
@@ -54,7 +55,7 @@ class MenuController:
                         print(f"Merci ! Vous avez entré : {choice}")
                         break
                     except ValueError:
-                        print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                        print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
                 print("match choice")
                 match choice:
@@ -62,7 +63,7 @@ class MenuController:
                         print("Ajouter un joueur depuis la liste des joueurs existants.")
                         player = menuview.get_player_from_list()
                         if playercontroller.is_player_in_tournament(player, tournament):
-                            print("Joueur.se déjà présent.e dans le tournois")
+                            print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
                         else:
                             tournamentcontroller.instantiate_player(player, tournament)
                             MenuController.launch_tournament_menu(tournament)
@@ -71,7 +72,7 @@ class MenuController:
                         print("Ajouter un joueur depuis son Chess ID.")
                         player = menuview.get_player_from_chess_id()
                         if playercontroller.is_player_in_tournament(player, tournament):
-                            print("Joueur.se déjà présent.e dans le tournois")
+                            print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
                         else:
                             tournamentcontroller.instantiate_player(player, tournament)
                             MenuController.launch_tournament_menu(tournament)
@@ -80,7 +81,7 @@ class MenuController:
                         playercontroller = PlayerController()
                         player = playercontroller.create_player()
                         if playercontroller.is_player_in_tournament(player, tournament):
-                            print("Joueur.se déjà présent.e dans le tournois")
+                            print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
                         else:
                             tournamentcontroller.instantiate_player(player, tournament)
                             MenuController.launch_tournament_menu(tournament)
@@ -89,7 +90,7 @@ class MenuController:
                         print("Fin d'import des joueurs.")
                         MenuController.launch_tournament_menu(tournament)
                     case _:
-                        print("Choix invalide. Veuillez choisir une option entre 1 et 4.")
+                        print("[red]ERREUR: Choix invalide. Veuillez choisir une option entre 1 et 4.[/red]")
         return (tournament)
 
     @staticmethod
@@ -235,7 +236,7 @@ class MenuController:
 
         while True:
             try:
-                tournament_choice = int(input("Selectionnez un tournois"))
+                tournament_choice = int(input("Selectionnez un tournois: "))
                 print(f"Merci ! Vous avez entré : {tournament_choice}")
                 break
             except ValueError:
@@ -254,7 +255,8 @@ class MenuController:
 
                 # 1. Nom et dates du tournoi donné
                 case 1:
-                    pass
+                    print("choix 1")
+                    tournamentview.display_tournament_name_date(tournament_choice)
                 # 2. Liste des joueurs du tournoi par ordre alphabétique
                 case 2:
                     tournamentview.display_tournament_players_list(tournament_choice)

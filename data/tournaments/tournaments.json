@@ -213,8 +213,8 @@
     {
         "name": "YOP",
         "location": "Lieux",
-        "start_date": 0.0004921259842519685,
-        "end_date": "13/12/2032",
+        "start_date": "12/05/2023",
+        "end_date": "12/05/2023",
         "rounds_number": 4,
         "current_round": 3,
         "rounds": [
@@ -609,6 +609,17 @@
                 "total_points": 0.0
             }
         ],
+        "description": ""
+    },
+    {
+        "name": "Super tournoi",
+        "location": "Strasbourg",
+        "start_date": "12/12/2023",
+        "end_date": "13/12/2023",
+        "rounds_number": 5,
+        "current_round": 0,
+        "rounds": [],
+        "players": [],
         "description": ""
     }
 ]
