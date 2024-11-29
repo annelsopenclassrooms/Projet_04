@@ -1,12 +1,13 @@
 from controllers.playercontroller import PlayerController
 from views.playerview import PlayerView
+from rich import print
 
 
 class MenuView:
 
     def main_menu(self):
         while True:
-            print("Menu Principal")
+            print("[dark_blue]Menu Principal[/dark_blue]")
             print("1. Creer des joueurs")
             print("2. Tournois")
             print("3. Rapports")
@@ -17,7 +18,7 @@ class MenuView:
 
     def tournament_menu(self):
 
-        print("Menu tournois")
+        print("[dark_blue]Menu tournois[/dark_blue]")
         print("1. Charger un tournois")
         print("2. Creer un tournois")
         print("3. Ajouter des joueurs au tournois")
@@ -29,11 +30,11 @@ class MenuView:
 
     def add_player_choice_list(self):
 
-        print("Ajouter un joueur au tournois:")
+        print("[dark_blue]Ajouter un joueur au tournois:[/dark_blue]")
         print("1. Depuis la liste des joueurs existants")
         print("2. Depuis son chess ID")
         print("3. Creer un nouveau joueur et l'ajouter au tournois")
-        print("4. Tous les joueurs sont importés")
+        print("4. Retour")
         choice = input("choix ?:")
         choice = int(choice)
         print(choice)
@@ -42,7 +43,7 @@ class MenuView:
 
     # choice 1
     def get_player_from_list(self):
-        print("liste des joueurs")
+        print("Liste des joueurs")
         playerview = PlayerView()
         players = playerview.get_players_list()
 
@@ -55,10 +56,10 @@ class MenuView:
                 else:
                     break
             except ValueError:
-                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
         choice = choice - 1
-        print(f"Vous avez ajouté {players[choice]['first_name']} {players[choice]['last_name']}")
+        print(f"[green]Vous avez ajouté {players[choice]['first_name']} {players[choice]['last_name']}[/green]")
 
         return (players[choice])
 
@@ -73,16 +74,16 @@ class MenuView:
             print("Joueur non trouvé")
 
     def next_round_menu(self):
-        print("Menu tour")
+        print("[dark_blue]Menu tour[/dark_blue]")
         print("1. Passer au tour suivant")
-        print("2. Sauvegarder le tournois")
-        print("3. Afficher le classement actuel")
+        print("2. Afficher le classement actuel")
+        print("3. Retour")
 
         choice = input("choix ?:")
         return (choice)
 
     def rapport_menu(self):
-        print("Menu rapports")
+        print("[dark_blue]Menu rapports[/dark_blue]")
         print("1. Liste de tous les joueurs par ordre alphabétique")
         print("2. Liste de tous les tournois")
         print("3. Détails d'un tournois")
@@ -92,7 +93,7 @@ class MenuView:
         return (choice)
 
     def rapport_tournament_menu(self):
-        print("Menu rapport tournois")
+        print("[dark_blue]Menu rapport tournois[/dark_blue]")
         print("1. Nom et dates du tournoi donné")
         print("2. Liste des joueurs du tournoi par ordre alphabétique")
         print("3. Liste de tous les tours du tournoi et de tous les matchs du tour")

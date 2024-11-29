@@ -52,5 +52,11 @@
         "first_name": "Anne",
         "birth_date": "12/12/1987",
         "chess_id": "PH57523"
+    },
+    {
+        "last_name": "Moreau",
+        "first_name": "Camille",
+        "birth_date": "18/03/1965",
+        "chess_id": "DI74307"
     }
 ]

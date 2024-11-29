@@ -1,17 +1,11 @@
-Afficher les info de tounrois proprement (pour l'instant juste objet)
 
-Utiliser pretty print (sauter des lignes pour plus de visibilité)
-
-Verifier les rapports
-nom et lieux ne marche pas ?
-formatage des sorties
-liste de joueur mettre un espace
-
-verfier affichage de tous les round et matchs
 
 Nous devons pouvoir sauvegarder et charger l'état du programme à tout moment entre
 deux actions de l'utilisateur.=> charger en cours de round
 =>sauvegarde auto apres chaque modif du tournois
+ajout player, match joué, round terminé
+attentation a match joué pour load
+attention aux nb de poinds des joueurs dans round(matches) et players 2 fois le meme objet
 
 empecher 3. Ajouter des joueurs au tournois
 si le tournoi a deja au moins un round de passé
@@ -22,6 +16,14 @@ ajouter retour à tous les menu
 
 prevenir si deequilibre nb joueur/tour => ok
 proposer de mofier le nb de tour ?
+
+toutes les erreurs en rouge
+
+passer tous les commentaires en anglais
+
+Utiliser pretty print (sauter des lignes pour plus de visibilité) partout
+
+flake8
 ==========================
 options: 
 export htlm, utiliser fstring
@@ -42,6 +44,26 @@ Faire des jolis menu
 option: save rapport csv
 ===========
 Fait:
+
+mettre la liste de match du round au debut du round
+dans le menu ajouter joueur au tournois, afficher la liste des joueurs deja prsent
+verfier affichage de tous les round et matchs
+au chargelent d'un tournois prevenir si il est fini(en orange)
+input resolution des rounds empecher les erreur (on peut mettre 4)
+pimper afficher le classement actuel menu apres un round 
+
+apres round
+    bouton retour
+    sauvegarde auto
+    enlever option sauvegarde
+
+Verifier les rapports
+nom et lieux ne marche pas ?
+formatage des sorties
+liste de joueur mettre un espace
+
+ajouter description
+Afficher les info de tounrois proprement (pour l'instant juste objet)
 
 input controller et correspondance chiffre et joueur selectionner
 sort les object joueur par ordre alphabetique avant de les lister (sinon pas de correspondance dans la selectrion)

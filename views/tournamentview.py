@@ -59,17 +59,50 @@ class TournamentView:
                 print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
 
         dict_tournament_for_json["rounds_number"] = round_number
+
+        tournament_description = input("Description du tounois ?(pas obligatoire): ")
+        dict_tournament_for_json["description"] = tournament_description
+
         return (dict_tournament_for_json)
 
     def display_tournament_infos(self, tournament):
-        print("tous les tournois (tournamentview, def display tournament info)")
+
+        print(tournament)
+        print(tournament.players)
+        table = Table(title="Infos du tournois", show_header=False, show_lines=True)
+
+        # Define additional columns for data
+        table.add_column("Value 1", style="bold")
+        table.add_column("Value 2", style="dark_blue")
+
+        table.add_row("Nom", tournament.name)
+        table.add_row("Lieu", tournament.location)
+        table.add_row("Date de début", tournament.start_date)
+        table.add_row("Date de fin", tournament.end_date)
+        table.add_row("Description", str(tournament.description))
+        table.add_row("Nombre de round", str(tournament.rounds_number))
+        table.add_row("Nombre de round joués", str(tournament.current_round))
+        table.add_row("Nombre de joueurs", str(len(tournament.players)))
+
+        console = Console()
+        console.print(table)
         print(tournament)
 
     def display_ranking(self, tournament):
         players = tournament.players
-        print("Classement actuel:")
+        
+        # use Rich module to print a table
+        table = Table(title="Classement des joueurs")
+
+        table.add_column("Nom", style="purple3")
+        table.add_column("Prénom", style="cyan")
+        table.add_column("Points", style="dark_blue")
+
         for player in players:
-            print(f"{player.last_name} {player.first_name} {player.total_points} points")
+            table.add_row(str(player.first_name), str(player.last_name), str(player.total_points))
+
+        console = Console()
+        console.print(table)
 
     def list_tournament_from_json(self):
         file_path = "data/tournaments/tournaments.json"
@@ -122,13 +155,16 @@ class TournamentView:
 
     def display_tournament_players_list(self, number):
 
-        print("fonction display_tournament_players_list")
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
             # Si le fichier existe, on le charge
             with open(file_path, "r") as f:
-                tournaments = json.load(f)  # Charge les données existantes dans une liste
+                tournaments = json.load(f)
+
+        players = tournaments[number - 1]["players"]
+
+        sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
 
         # use Rich module to print a table
         table = Table(title="Liste des joueurs dans le tournois")
@@ -136,7 +172,7 @@ class TournamentView:
         table.add_column("Nom", style="purple3")
         table.add_column("Prénom", style="cyan")
 
-        for player in tournaments[number - 1]["players"]:
+        for player in sorted_players:
             table.add_row(str(player['first_name']), str(player['last_name']))
 
         console = Console()
@@ -169,3 +205,16 @@ class TournamentView:
 
             console = Console()
             console.print(table)
+
+    def display_players_in_current_tournament(self, tournament):
+
+        table = Table(title="Liste des joueurs dans le tournois en cours")
+
+        table.add_column("Nom", style="purple3")
+        table.add_column("Prénom", style="cyan")
+
+        for player in tournament.players:
+            table.add_row(str(player.first_name), str(player.last_name))
+
+        console = Console()
+        console.print(table)

@@ -33,10 +33,8 @@ if __name__ == "__main__":
 
     #menumenuview = MenuView()
     menucontroller = MenuController()
-    while True:
-
         #print(f"boucle main {tournament}")
-        print ("♜ ♞ ♝ ♛ BIENVENUE♚ ♝ ♞ ♜")
-        print (splash_screen())
-        tournament = menucontroller.launch_main_menu(tournament)
+    print ("♜ ♞ ♝ ♛ BIENVENUE♚ ♝ ♞ ♜")
+    print (splash_screen())
+    tournament = menucontroller.launch_main_menu(tournament)
 

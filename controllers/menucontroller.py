@@ -33,6 +33,7 @@ class MenuController:
                 MenuController.launch_rapport_menu(tournament)
             # 4. Quitter le programme
             case 4:
+                print("BYE BYE")
                 exit()
             case _:
                 print("[red]ERREUR: Merci d'entre un valeur comprise entre 1 et 4[/red]")
@@ -43,11 +44,14 @@ class MenuController:
         menuview = MenuView()
         tournamentcontroller = TournamentController()
         playercontroller = PlayerController()
+        tournamentview = TournamentView()
 
         if not tournament:
-            print("[red]ERREUR: Merci de créer un tournois avant d'ajouter les joueurs[/red]")
+            print("[red]ERREUR: Merci de créer ou charger un tournois avant d'ajouter les joueurs[/red]")
         else:
             while True:
+
+                tournamentview.display_players_in_current_tournament(tournament)
 
                 while True:
                     try:
@@ -66,7 +70,7 @@ class MenuController:
                             print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
                         else:
                             tournamentcontroller.instantiate_player(player, tournament)
-                            MenuController.launch_tournament_menu(tournament)
+                            tournamentcontroller.save_tournament(tournament)
 
                     case 2:
                         print("Ajouter un joueur depuis son Chess ID.")
@@ -75,7 +79,7 @@ class MenuController:
                             print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
                         else:
                             tournamentcontroller.instantiate_player(player, tournament)
-                            MenuController.launch_tournament_menu(tournament)
+                            tournamentcontroller.save_tournament(tournament)
                     case 3:
                         print("Créer un nouveau joueur et l'ajouter au tournoi.")
                         playercontroller = PlayerController()
@@ -84,10 +88,9 @@ class MenuController:
                             print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
                         else:
                             tournamentcontroller.instantiate_player(player, tournament)
-                            MenuController.launch_tournament_menu(tournament)
+                            tournamentcontroller.save_tournament(tournament)
 
                     case 4:
-                        print("Fin d'import des joueurs.")
                         MenuController.launch_tournament_menu(tournament)
                     case _:
                         print("[red]ERREUR: Choix invalide. Veuillez choisir une option entre 1 et 4.[/red]")
@@ -110,7 +113,6 @@ class MenuController:
 
             match choice:
                 # 1. Charger un tournois
-
                 case 1:
                     if tournament:
                         print(
@@ -119,19 +121,22 @@ class MenuController:
                             )
                     else:
                         tournament = tournamentcontroller.load_tournament()
+
                 # 2. Creer un tournois
                 case 2:
                     if tournament:
 
                         print(
                             "ERREUR: Un tournoi est déjà chargé. "
-                            "Merci de quitter le logiciel si vous souhaitez en charger un autre."
+                            "Merci de quitter le logiciel si vous souhaitez en créer un nouveau."
                             )
                     else:
                         tournament = tournamentcontroller.create_tournament()
+
                 # 3. Ajouter des joueurs au tournois
                 case 3:
                     tournament = MenuController.launch_add_player_menu(tournament)
+
                 # 4. Lancer le tournois
                 case 4:
 
@@ -140,30 +145,27 @@ class MenuController:
                     if tournament_status[0]:
                         # Tournament ready
                         while True:
-                            if tournament.current_round + 1 >= tournament.rounds_number:
+                            if tournament.current_round >= tournament.rounds_number:
                                 MenuController.launch_end_of_tournament_menu(tournament)
                                 MenuController.launch_main_menu(tournament)
 
                             else:
                                 tournament = tournamentcontroller.start_tournament(tournament)
                                 MenuController.launch_next_round_menu(tournament)
-
                     else:
                         print("Merci de corriger le problème avant de lancer le tournois")
 
                 # 5. Afficher les infos du tournois
                 case 5:
                     tournamentview.display_tournament_infos(tournament)
-
                 # 6. Retour
                 case 6:
-                    menuview.main_menu()
+                    MenuController.launch_main_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 6")
 
     def launch_next_round_menu(tournament):
         menuview = MenuView()
-        tournamentcontroller = TournamentController()
         tournamentview = TournamentView()
 
         while True:
@@ -181,17 +183,17 @@ class MenuController:
                 # 1. Passer au tour suivant
                 case 1:
                     return (tournament)
-                # 2. Sauvegarder le tournois
+                # 2. Afficher le classement actuel
                 case 2:
-                    tournamentcontroller.save_tournament(tournament)
-                # 3. Afficher le classement actuel
-                case 3:
                     tournamentview.display_ranking(tournament)
+                # 3. Retour
+                case 3:
+                    MenuController.launch_tournament_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 3")
 
     def launch_end_of_tournament_menu(tournament):
-        print("XXXXXXXXX FIN DU TOURNOIS XXXXXXXXXXXX")
+        print("♜♞♝♛♚♝♞♜ ♟♟♟♟♟♟♟♟ FIN DU TOURNOIS ♟♟♟♟♟♟♟♟♜♞♝♛♚♝♞♜ ")
         tournamentview = TournamentView()
         tournamentview.display_ranking(tournament)
         return (tournament)
@@ -228,7 +230,7 @@ class MenuController:
                 case 4:
                     MenuController.launch_main_menu(tournament)
                 case _:
-                    print("Merci d'entrer un valeur entre 1 et 3")
+                    print("Merci d'entrer un valeur entre 1 et 4")
 
     def launch_rapport_tournament_menu(tournament):
         menuview = MenuView()
@@ -255,7 +257,6 @@ class MenuController:
 
                 # 1. Nom et dates du tournoi donné
                 case 1:
-                    print("choix 1")
                     tournamentview.display_tournament_name_date(tournament_choice)
                 # 2. Liste des joueurs du tournoi par ordre alphabétique
                 case 2:
@@ -267,5 +268,4 @@ class MenuController:
                 case 4:
                     MenuController.launch_rapport_menu(tournament)
                 case _:
-                    print("Merci d'entrer un valeur entre 1 et 3")
-
+                    print("Merci d'entrer un valeur entre 1 et 4")

@@ -1,5 +1,8 @@
 import json
 import os
+
+from rich import print
+
 from views.playerview import PlayerView
 
 
