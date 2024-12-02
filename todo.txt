@@ -1,4 +1,4 @@
-
+export nb de round
 
 
 prevenir si deequilibre nb joueur/tour => ok

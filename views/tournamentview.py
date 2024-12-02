@@ -1,5 +1,8 @@
 import os
 import json
+import csv
+
+from datetime import datetime
 
 from rich import print
 from rich.console import Console
@@ -105,11 +108,16 @@ class TournamentView:
 
     def list_tournament_from_json(self):
         file_path = "data/tournaments/tournaments.json"
+        table_to_export = []
 
         if os.path.exists(file_path):
             # Load file if existing
             with open(file_path, "r") as f:
                 tournaments = json.load(f)
+
+        # prepare for export
+        title = ["Numéro", "Nom", "Lieux","Date de début"]
+        table_to_export.append(title)
 
         # use Rich module to print a table
         table = Table(title="Liste des tournois")
@@ -123,15 +131,18 @@ class TournamentView:
             table.add_row(str(tournament_number), str(tournament['name']), str(tournament['location']),
                           str(tournament['start_date']))
 
+            table_to_export.append([tournament_number, tournament['name'], tournament['location'],
+                                    tournament['start_date']])
+
             tournament_number = tournament_number + 1
 
         console = Console()
         console.print(table)
+        return (table_to_export)
 
     def display_tournament_name_date(self, number):
         file_path = "data/tournaments/tournaments.json"
-
-        print("display_tournament_name_date")
+        table_to_export = []
 
         if os.path.exists(file_path):
             # Load file if existing
@@ -140,21 +151,31 @@ class TournamentView:
 
         tournament = tournaments[number]
 
+        # prepare for export
+        title = ["Nom", "Lieux", "Date de début", "Date de fin"]
+        table_to_export.append(title)
+
         # use Rich module to print a table
         table = Table(title="Détails du tournoi")
         table.add_column("Nom", style="purple3")
+        table.add_column("Lieu", style="medium_orchid")
         table.add_column("Date de début", style="green")
         table.add_column("Date de fin", style="magenta")
 
-        table.add_row(str(tournament['name']), str(tournament['start_date']),
+        table.add_row(str(tournament['name']),str(tournament['location']), str(tournament['start_date']),
                       str(tournament['end_date']))
+
+        table_to_export.append([tournament['name'], tournament['location'],
+                                tournament['start_date'], tournament['end_date']])
 
         console = Console()
         console.print(table)
-
+        return (table_to_export, tournament['name'])
+    
     def display_tournament_players_list(self, number):
 
         file_path = "data/tournaments/tournaments.json"
+        table_to_export = []
 
         if os.path.exists(file_path):
             # Load file if existing
@@ -165,6 +186,11 @@ class TournamentView:
 
         sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
 
+        # prepare for export
+        title = ["Prénom", "Nom"]
+        table_to_export.append(title)
+        file_title = tournaments[number - 1]["name"]
+
         # use Rich module to print a table
         table = Table(title="Liste des joueurs dans le tournois")
 
@@ -174,21 +200,34 @@ class TournamentView:
         for player in sorted_players:
             table.add_row(str(player['first_name']), str(player['last_name']))
 
+            table_to_export.append([player['first_name'], player['last_name']])
+
         console = Console()
         console.print(table)
+        return (table_to_export, file_title)
 
     # 3. Liste de tous les tours du tournoi et de tous les matchs du tour
     def display_tournament_rounds(self, number):
 
         file_path = "data/tournaments/tournaments.json"
+        table_to_export = []
 
         if os.path.exists(file_path):
             # Load file if existing
             with open(file_path, "r") as f:
                 tournaments = json.load(f)
 
+        # prepare for export
+        title = ["Tour", "Prénom joueur 1", "Nom Joueur 1", "Prénom joueur 2", "Score joueur 1",
+                 "Prénom joueur 2", "Nom Joueur 2", "Score joueur 2"]
+        table_to_export.append(title)
+
+        file_title = tournaments[number - 1]["name"]
+
         # use Rich module to print a table
         round_number = 1
+
+        tournaments[number - 1]["rounds"]
         for round in tournaments[number - 1]["rounds"]:
 
             table = Table(title=f"Tour: {round_number}")
@@ -200,10 +239,16 @@ class TournamentView:
             for match in round["matches"]:
                 table.add_row(str(f"{match[0]['first_name']} {match[0]['last_name']}"), str(match[0]['match_points']),
                               str(f"{match[1]['first_name']} {match[1]['last_name']}"), str(match[1]['match_points']))
+
+                table_to_export.append([round_number, match[0]['first_name'], match[0]['last_name'],
+                                        match[0]['match_points'],
+                                        match[1]['first_name'], match[1]['last_name'], match[1]['match_points']])
             round_number = round_number + 1
 
             console = Console()
             console.print(table)
+
+        return (table_to_export, file_title)
 
     def display_players_in_current_tournament(self, tournament):
 
@@ -217,3 +262,32 @@ class TournamentView:
 
         console = Console()
         console.print(table)
+
+    def export(self, table, title):
+        print(table)
+        print(title)
+
+        # Create 'export' directory if it doesn't exist
+        if not os.path.exists('export'):
+            os.makedirs('export')
+
+        # Get the current date and time
+        current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+        # Use the title and date/time in the filename
+        filename = f"export/{title}_{current_datetime}.csv"
+
+        with open(filename, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerows(table)  # Écrire toutes les lignes dans le fichier CSV
+        print(f"[green]Le fichier CSV a été généré : {filename}[/green]")
+
+    def input_round_number(self, tournament):
+        while True:
+            try:
+                round_number = int(input("Nombre de tours ?: "))
+                break
+            except ValueError:
+                print("[red]ERREUR : ce n'est pas un entier valide. Veuillez réessayer.[/red]")
+
+        return (round_number)

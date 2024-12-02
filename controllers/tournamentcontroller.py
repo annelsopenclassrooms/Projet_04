@@ -94,6 +94,7 @@ class TournamentController:
         # Update current round in tournament
         tournament.current_round = tournament.current_round + 1
 
+
         # Save tournament
         tournamentcontroller.save_tournament(tournament)
 
@@ -275,8 +276,17 @@ class TournamentController:
                 error_code = 4
 
             if len(tournament.players) < tournament.rounds_number:
-                print("[red]ERREUR: Trop de rounds: impossible de n'avoir que des matchs uniques[/red]")
+                print("[red]ERREUR: Trop de rounds: impossible de n'avoir que des matchs uniques.[/red]")
                 tournament_ready = False
                 error_code = 5
 
         return (tournament_ready, error_code)
+
+    def change_round_number(self, tournament, new_round_number):
+        tournamentcontroller = TournamentController()
+
+        tournament.rounds_number = new_round_number
+
+        print(tournament)
+
+        tournamentcontroller.save_tournament(tournament)

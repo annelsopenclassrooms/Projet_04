@@ -58,5 +58,11 @@
         "first_name": "Camille",
         "birth_date": "18/03/1965",
         "chess_id": "DI74307"
+    },
+    {
+        "last_name": "Lemaitre",
+        "first_name": "Francois",
+        "birth_date": "18/08/1999",
+        "chess_id": "ZN76540"
     }
 ]

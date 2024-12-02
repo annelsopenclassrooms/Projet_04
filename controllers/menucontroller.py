@@ -1,8 +1,10 @@
 
 from rich import print
+
 from views.tournamentview import TournamentView
 from views.menuview import MenuView
 from views.playerview import PlayerView
+
 from controllers.playercontroller import PlayerController
 from controllers.tournamentcontroller import TournamentController
 
@@ -154,6 +156,10 @@ class MenuController:
                             else:
                                 tournament = tournamentcontroller.start_tournament(tournament)
                                 menucontroller.launch_next_round_menu(tournament)
+
+                    if tournament_status[1] == 5:
+                        menucontroller.launch_change_round_menu(tournament)
+
                     else:
                         print("Merci de corriger le problème avant de lancer le tournois")
 
@@ -222,11 +228,14 @@ class MenuController:
                 # 1. Liste de tous les joueurs par ordre alphabétique
                 case 1:
                     playerview = PlayerView()
-                    playerview.get_players_list()
+                    players, table_to_export = playerview.get_players_list()
+                    menucontroller.launch_export_menu(table_to_export, "Liste_des_joueurs")
                 # 2. Liste de tous les tournois
                 case 2:
                     tournamentview = TournamentView()
-                    tournamentview.list_tournament_from_json()
+                    table_to_export = tournamentview.list_tournament_from_json()
+                    menucontroller.launch_export_menu(table_to_export, "Liste_des_tournois")
+
                 # 3. Détails d'un tournois
                 case 3:
                     tournamentview = TournamentView()
@@ -241,6 +250,7 @@ class MenuController:
     def launch_rapport_tournament_menu(self, tournament):
         menuview = MenuView()
         tournamentview = TournamentView()
+        menucontroller = MenuController()
 
         while True:
             try:
@@ -263,15 +273,72 @@ class MenuController:
 
                 # 1. Nom et dates du tournoi donné
                 case 1:
-                    tournamentview.display_tournament_name_date(tournament_choice)
+                    table_to_export, title = tournamentview.display_tournament_name_date(tournament_choice)
+                    file_title = f"Details_{title}"
+                    menucontroller.launch_export_menu(table_to_export, file_title)
                 # 2. Liste des joueurs du tournoi par ordre alphabétique
                 case 2:
-                    tournamentview.display_tournament_players_list(tournament_choice)
+                    table_to_export, title = tournamentview.display_tournament_players_list(tournament_choice)
+                    file_title = f"Joueurs_{title}"
+                    menucontroller.launch_export_menu(table_to_export, file_title)
                 # 3. Liste de tous les tours du tournoi et de tous les matchs du tour
                 case 3:
-                    tournamentview.display_tournament_rounds(tournament_choice)
+                    table_to_export, title = tournamentview.display_tournament_rounds(tournament_choice)
+                    file_title = f"Tours_{title}"
+                    menucontroller.launch_export_menu(table_to_export, file_title)
                 # 4. Retour
                 case 4:
-                    MenuController.launch_rapport_menu(tournament)
+                    menucontroller.launch_rapport_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 4")
+
+    def launch_export_menu(self, table_to_export, title):
+        tournamentview = TournamentView()
+        menuview = MenuView()
+        while True:
+            while True:
+                try:
+                    choice = int(menuview.export_menu())
+                    print(f"Merci ! Vous avez entré : {choice}")
+                    break
+                except ValueError:
+                    print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
+
+            match choice:
+
+                # Yes
+                case 1:
+                    tournamentview.export(table_to_export, title)
+                    break
+                # No
+                case 2:
+                    break
+                case _:
+                    print("[red]ERREUR: Merci d'entrer une valeur de 1 ou 2.[/red]")
+
+    def launch_change_round_menu(self, tournament):
+        tournamentview = TournamentView()
+        tournamentcontroller = TournamentController()
+        menuview = MenuView()
+        while True:
+            while True:
+                try:
+                    choice = int(menuview.change_round_number_menu())
+                    print(f"Merci ! Vous avez entré : {choice}")
+                    break
+                except ValueError:
+                    print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
+
+            match choice:
+
+                # Yes
+                case 1:
+                    round_number = tournamentview.input_round_number(tournament)
+                    tournamentcontroller.change_round_number(tournament, round_number)
+                    break
+                # No
+                case 2:
+                    break
+                case _:
+                    print("[red]ERREUR: Merci d'entrer une valeur de 1 ou 2.[/red]")
+

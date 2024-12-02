@@ -48,6 +48,8 @@ class PlayerView:
 
     def get_players_list(self):
         file_path = "data/players/players.json"
+        table_to_export = []
+
         # Open file JSON
         with open(file_path, 'r') as f:
             # Load JSON in a list
@@ -55,9 +57,12 @@ class PlayerView:
 
         sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
 
+        # prepare for export
+        title = ["Prénom", "Nom", "date de naissance","Chess ID"]
+        table_to_export.append(title)
+
         # use Rich module to print a table
         table = Table(title="Liste des joueurs")
-        table.add_column("Numéro", style="cyan")
         table.add_column("Prénom", style="purple3")
         table.add_column("Nom", style="magenta")
         table.add_column("Date de naissance", style="green")
@@ -68,10 +73,13 @@ class PlayerView:
             table.add_row(str(number), str(player['first_name']), str(player['last_name']),
                           str(player['birth_date']), str(player['chess_id']))
 
+            table_to_export.append([player['first_name'], player['last_name'],
+                                    player['birth_date'], player['chess_id']])
+
             number = number + 1
 
         console = Console()
         console.print(table)
 
         # Return list of dictionnaries contained in the json file
-        return (sorted_players)
+        return (sorted_players, table_to_export)

@@ -1631,5 +1631,38 @@
             }
         ],
         "description": ""
+    },
+    {
+        "name": "Popopo",
+        "location": "Mmoom",
+        "start_date": "12/12/2023",
+        "end_date": "12/12/2023",
+        "rounds_number": 2,
+        "current_round": 0,
+        "rounds": [],
+        "players": [
+            {
+                "last_name": "Dilbert",
+                "first_name": "Aude",
+                "birth_date": "27/08/1989",
+                "chess_id": "JI75430",
+                "total_points": 0.0
+            },
+            {
+                "last_name": "Le Berre",
+                "first_name": "Anne",
+                "birth_date": "25/08/1999",
+                "chess_id": "AB12341",
+                "total_points": 0.0
+            },
+            {
+                "last_name": "Lemaitre",
+                "first_name": "Francois",
+                "birth_date": "18/08/1999",
+                "chess_id": "ZN76540",
+                "total_points": 0.0
+            }
+        ],
+        "description": ""
     }
 ]

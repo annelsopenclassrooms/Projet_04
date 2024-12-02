@@ -45,7 +45,7 @@ class MenuView:
     def get_player_from_list(self):
         print("Liste des joueurs")
         playerview = PlayerView()
-        players = playerview.get_players_list()
+        players, table_to_export = playerview.get_players_list()
 
         while True:
             try:
@@ -99,5 +99,21 @@ class MenuView:
         print("3. Liste de tous les tours du tournoi et de tous les matchs du tour")
         print("4. Retour")
 
+        choice = input("choix ?:")
+        return (choice)
+
+    def export_menu(self):
+        print("[dark_blue]Voulez vous exporter le rapport ?[/dark_blue]")
+        print("1. Oui")
+        print("2. Non")
+        
+        choice = input("choix ?:")
+        return (choice)
+
+    def change_round_number_menu(self):
+        print("[dark_blue]Voulez vous changer le nombre de tour ?[/dark_blue]")
+        print("1. Oui")
+        print("2. Non")
+        
         choice = input("choix ?:")
         return (choice)
