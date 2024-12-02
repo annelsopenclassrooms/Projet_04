@@ -27,7 +27,7 @@ class PlayerController:
         with open(file_path, "w") as f:
             json.dump(players, f, indent=4)  # On utilise indent pour avoir un fichier lisible
 
-        print("Le joueur a été ajouté avec succès.")
+        print("[green]Le joueur a été ajouté avec succès.[green]")
         return (data)
 
     def search_chess_id(self, chess_id):

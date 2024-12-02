@@ -9,9 +9,9 @@ from models.round import Round
 from models.player import Player
 
 from views.tournamentview import TournamentView
-from views.matchesview import MatchesView
 
 from controllers.roundcontroller import RoundController
+from controllers.matchcontroller import MatchesController
 
 
 class TournamentController:
@@ -38,7 +38,7 @@ class TournamentController:
         tournament = Tournament(data["name"], data["location"], data["start_date"],
                                 data["end_date"], data["rounds_number"], data["description"])
 
-        print("Le tournois a été crée avec succès.")
+        print("[green]Le tournois a été crée avec succès.[/green]")
 
         self.save_tournament(tournament)
         return (tournament)
@@ -53,15 +53,42 @@ class TournamentController:
 
     def start_tournament(self, tournament):
 
+        print(f"[dark_blue]Tour en cours: [/dark_blue]{tournament.current_round + 1}")
+
+        matchcontroller = MatchesController()
         tournamentcontroller = TournamentController()
+
         round = Round(tournament.current_round)
+
         round.start_time = datetime.now().strftime("%d/%m/%Y %H:%M")
         roundcontroller = RoundController()
-        roundcontroller.generate_round_matches(tournament, round)
-        # Add round to tournament
-        tournament.rounds.append(round)
-        matchview = MatchesView()
-        matchview.input_results(tournament)
+
+        # if matches already created (loading an existing tournament)
+        if len(tournament.rounds) >= tournament.current_round + 1:
+            pass
+
+        else:
+
+            roundcontroller.generate_round_matches(tournament, round)
+
+            # Add round to tournament
+            tournament.rounds.append(round)
+
+        # Get match results
+
+        matches = tournament.rounds[tournament.current_round].matches
+        for match in matches:
+            # if match already resolve get next
+            if matchcontroller.match_is_played(match):
+                pass
+            else:
+                matchcontroller.get_results(match)
+
+            # Save tournament
+            tournamentcontroller.save_tournament(tournament)
+
+        # matchview = MatchesView()
+        # matchview.input_results(tournament)
 
         Player.sort_by_total_points(tournament)
 
@@ -214,7 +241,7 @@ class TournamentController:
                                 ['location'], tournaments[tournament_number - 1]['start_date'],
                                 tournaments[tournament_number - 1]['end_date'], tournaments[tournament_number - 1]
                                 ['rounds_number'], tournaments[tournament_number - 1]['description'], )
-        
+
         tournament.current_round = tournaments[tournament_number - 1]['current_round']
         tournament.rounds = rounds
         tournament.players = players

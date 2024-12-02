@@ -61,7 +61,6 @@ class MenuController:
                     except ValueError:
                         print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
-                print("match choice")
                 match choice:
                     case 1:
                         print("Ajouter un joueur depuis la liste des joueurs existants.")
@@ -109,14 +108,14 @@ class MenuController:
                     print(f"Merci ! Vous avez entré : {choice}")
                     break
                 except ValueError:
-                    print("ERREUR: ce n'est pas un entier valide. Veuillez réessayer.")
+                    print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
             match choice:
                 # 1. Charger un tournois
                 case 1:
                     if tournament:
                         print(
-                            "ERREUR: Un tournoi est déjà chargé. "
+                            "[red]ERREUR: Un tournoi est déjà chargé. [/red]"
                             "Merci de quitter le logiciel si vous souhaitez en charger un autre."
                             )
                     else:
@@ -127,7 +126,7 @@ class MenuController:
                     if tournament:
 
                         print(
-                            "ERREUR: Un tournoi est déjà chargé. "
+                            "[red]ERREUR: Un tournoi est déjà chargé. [/red]"
                             "Merci de quitter le logiciel si vous souhaitez en créer un nouveau."
                             )
                     else:
@@ -135,7 +134,10 @@ class MenuController:
 
                 # 3. Ajouter des joueurs au tournois
                 case 3:
-                    tournament = MenuController.launch_add_player_menu(tournament)
+                    if len(tournament.rounds) != 0:
+                        print("[red]ERREUR: Le tournois est déjà lancé. Impossible d'ajouter des joueurs[/red]")
+                    else:
+                        tournament = MenuController.launch_add_player_menu(tournament)
 
                 # 4. Lancer le tournois
                 case 4:
@@ -157,7 +159,10 @@ class MenuController:
 
                 # 5. Afficher les infos du tournois
                 case 5:
-                    tournamentview.display_tournament_infos(tournament)
+                    if tournament:
+                        tournamentview.display_tournament_infos(tournament)
+                    else:
+                        print("[red]ERREUR: Aucun tournois en cours. Merci de créer ou charger un tournois[/red]")
                 # 6. Retour
                 case 6:
                     MenuController.launch_main_menu(tournament)
@@ -176,7 +181,7 @@ class MenuController:
                     print(f"Merci ! Vous avez entré : {choice}")
                     break
                 except ValueError:
-                    print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                    print("[red]ERREUR : ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
             match choice:
 
@@ -209,7 +214,7 @@ class MenuController:
                     print(f"Merci ! Vous avez entré : {choice}")
                     break
                 except ValueError:
-                    print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                    print("[red]ERREUR : ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
             match choice:
 
@@ -242,7 +247,7 @@ class MenuController:
                 print(f"Merci ! Vous avez entré : {tournament_choice}")
                 break
             except ValueError:
-                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                print("[red]ERREUR : ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
         while True:
             while True:
@@ -251,7 +256,7 @@ class MenuController:
                     print(f"Merci ! Vous avez entré : {choice}")
                     break
                 except ValueError:
-                    print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                    print("[red]ERREUR : ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
             match choice:
 

@@ -7,7 +7,7 @@ from models.player import Player
 
 class RoundController:
 
-    @staticmethod    
+    @staticmethod
     def generate_round_matches(tournament, round):
 
         players = tournament.players
@@ -102,8 +102,8 @@ class RoundController:
                 if len(players_left) == 0:
                     print("break")
                     break
-        
-        print (f"[cyan]Matchs du tour {int(round.name) + 1}:[/cyan]")
+
+        print(f"[cyan]Matchs du tour {int(round.name) + 1}:[/cyan]")
         for match in round.matches:
             print(
                 f"[cyan]{match[0][0].first_name} {match[0][0].last_name} VS [/cyan]"
@@ -115,8 +115,10 @@ class RoundController:
         for round in tournament.rounds:
 
             for pair in round.matches:
+                # if (player1 == pair[0][0] and player2 == pair[1][0]) or
+                # (player2 == pair[0][0] and player1 == pair[1][0]):
+                if {player1, player2} == {pair[0][0], pair[1][0]}:
 
-                if (player1 == pair[0][0] and player2 == pair[1][0]) or (player2 == pair[0][0] and player1 == pair[1][0]):
                     return True
 
         return False
