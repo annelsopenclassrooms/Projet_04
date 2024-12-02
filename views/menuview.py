@@ -71,7 +71,7 @@ class MenuView:
         if result:
             return (result)
         else:
-            print("Joueur non trouvé")
+            print("[red]ERREUR: Joueur non trouvé[/red]")
 
     def next_round_menu(self):
         print("[dark_blue]Menu tour[/dark_blue]")

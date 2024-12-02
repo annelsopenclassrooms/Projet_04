@@ -1,17 +1,10 @@
 
 
-blinder tous les input
-
-ajouter retour à tous les menu
 
 prevenir si deequilibre nb joueur/tour => ok
 proposer de mofier le nb de tour ?
 
-toutes les erreurs en rouge
 
-passer tous les commentaires en anglais
-
-Utiliser pretty print (sauter des lignes pour plus de visibilité) partout
 
 flake8
 ==========================
@@ -34,6 +27,12 @@ Faire des jolis menu
 option: save rapport csv
 ===========
 Fait:
+toutes les erreurs en rouge
+passer tous les commentaires en anglais
+blinder tous les input
+ajouter retour à tous les menu
+Utiliser pretty print (sauter des lignes pour plus de visibilité) partout
+
 empecher 3. Ajouter des joueurs au tournois
 si le tournoi a deja au moins un round passé ou en cours
 

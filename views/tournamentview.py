@@ -90,7 +90,7 @@ class TournamentView:
 
     def display_ranking(self, tournament):
         players = tournament.players
-        
+
         # use Rich module to print a table
         table = Table(title="Classement des joueurs")
 
@@ -108,9 +108,9 @@ class TournamentView:
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
-                tournaments = json.load(f)  # Charge les données existantes dans une liste
+                tournaments = json.load(f)
 
         # use Rich module to print a table
         table = Table(title="Liste des tournois")
@@ -135,7 +135,7 @@ class TournamentView:
         print("display_tournament_name_date")
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
                 tournaments = json.load(f)  # Charge les données existantes dans une liste
 
@@ -158,7 +158,7 @@ class TournamentView:
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
                 tournaments = json.load(f)
 
@@ -184,9 +184,9 @@ class TournamentView:
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
-                tournaments = json.load(f)  # Charge les données existantes dans une liste
+                tournaments = json.load(f)
 
         # use Rich module to print a table
         round_number = 1

@@ -21,17 +21,17 @@ class TournamentController:
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
-                tournaments = json.load(f)  # Charge les données existantes dans une liste
+                tournaments = json.load(f)
         else:
-            # Si le fichier n'existe pas, on initialise une liste vide
+            # If the file does not exist initialize empty list
             tournaments = []
 
         # Add tournament to the list
         tournaments.append(data)
 
-        # Sauvegarde les données mises à jour dans le fichier JSON
+        # Save updated data in the JSON file
         with open(file_path, "w") as f:
             json.dump(tournaments, f, indent=4)
 
@@ -107,7 +107,7 @@ class TournamentController:
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
                 # Load existing data in a list
                 tournaments = json.load(f)
@@ -197,9 +197,9 @@ class TournamentController:
         file_path = "data/tournaments/tournaments.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load existing data in a list
             with open(file_path, "r") as f:
-                tournaments = json.load(f)  # Charge les données existantes dans une liste
+                tournaments = json.load(f)
         else:
             print("Aucun tournois sauvegardés")
             return (None)

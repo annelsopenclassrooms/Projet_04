@@ -13,19 +13,19 @@ class PlayerController:
         file_path = "data/players/players.json"
 
         if os.path.exists(file_path):
-            # Si le fichier existe, on le charge
+            # Load file if existing
             with open(file_path, "r") as f:
-                players = json.load(f)  # Charge les données existantes dans une liste
+                players = json.load(f)
         else:
-            # Si le fichier n'existe pas, on initialise une liste vide
+            # If the file does not exist initialize empty list
             players = []
 
-        # Ajoute le nouveau joueur à la liste
+        # Add new player to the list
         players.append(data)
 
-        # Sauvegarde les données mises à jour dans le fichier JSON
+        # Save updated data in the JSON file
         with open(file_path, "w") as f:
-            json.dump(players, f, indent=4)  # On utilise indent pour avoir un fichier lisible
+            json.dump(players, f, indent=4)
 
         print("[green]Le joueur a été ajouté avec succès.[green]")
         return (data)

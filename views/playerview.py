@@ -68,7 +68,7 @@ class PlayerView:
                           str(player['birth_date']), str(player['chess_id']))
 
             number = number + 1
-            
+
         console = Console()
         console.print(table)
 
