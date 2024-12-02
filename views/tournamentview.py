@@ -1,6 +1,7 @@
 import os
 import json
 
+from rich import print
 from rich.console import Console
 from rich.table import Table
 
@@ -10,10 +11,11 @@ from controllers.inputcontroller import InputController
 class TournamentView:
     def get_tournament_input_creation(self):
         dict_tournament_for_json = {}
+        inputcontroller = InputController()
 
         while True:
             tournament_name = input("Nom du tounois ?: ")
-            if InputController.is_tournament_name(tournament_name):
+            if inputcontroller.is_tournament_name(tournament_name):
                 break
             else:
                 print("Merci de donner un nom de tournois valide")
@@ -21,7 +23,7 @@ class TournamentView:
 
         while True:
             location_name = input("Nom du lieux ?: ")
-            if InputController.is_location_name(location_name):
+            if inputcontroller.is_location_name(location_name):
                 break
             else:
                 print("Merci de donner un nom de lieu valide")
@@ -30,7 +32,7 @@ class TournamentView:
 
         while True:
             start_date = input("Date de début ?: ")
-            if InputController.is_date_past(start_date):
+            if inputcontroller.is_date_past(start_date):
                 break
             else:
                 print("Merci de donner une date valide (JJ/MM/AAAA) et pas dans le futur")
@@ -39,7 +41,7 @@ class TournamentView:
 
         while True:
             end_date = input("Date de fin ?: ")
-            if InputController.is_date(end_date):
+            if inputcontroller.is_date(end_date):
 
                 if end_date < start_date:
                     print("Le date de fin ne doit pas preceder la date de debut")
@@ -56,7 +58,7 @@ class TournamentView:
                 round_number = int(input("Nombre de tours ?: "))
                 break
             except ValueError:
-                print("Erreur : ce n'est pas un entier valide. Veuillez réessayer.")
+                print("[red]ERREUR : ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
         dict_tournament_for_json["rounds_number"] = round_number
 
@@ -67,8 +69,6 @@ class TournamentView:
 
     def display_tournament_infos(self, tournament):
 
-        print(tournament)
-        print(tournament.players)
         table = Table(title="Infos du tournois", show_header=False, show_lines=True)
 
         # Define additional columns for data
@@ -86,7 +86,6 @@ class TournamentView:
 
         console = Console()
         console.print(table)
-        print(tournament)
 
     def display_ranking(self, tournament):
         players = tournament.players

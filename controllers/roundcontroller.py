@@ -7,8 +7,7 @@ from models.player import Player
 
 class RoundController:
 
-    @staticmethod
-    def generate_round_matches(tournament, round):
+    def generate_round_matches(self, tournament, round):
 
         players = tournament.players
         nb_player = len(players)
@@ -37,7 +36,7 @@ class RoundController:
                 players_left.append(player)
 
             while True:
-
+                roundcontroller = RoundController()    
                 player1 = players_left[0]
                 index_player2 = 0
                 index_same_total = 0
@@ -88,7 +87,7 @@ class RoundController:
                             random.shuffle(same_total)
                             player2 = same_total[index_player2]
 
-                    if RoundController.is_existing_pair(player1, player2, tournament):
+                    if roundcontroller.is_existing_pair(player1, player2, tournament):
 
                         index_player2 = index_player2 + 1
                         index_same_total = index_same_total + 1
@@ -110,8 +109,7 @@ class RoundController:
                 f"[cyan]{match[1][0].first_name} {match[1][0].last_name}[/cyan]"
                 )
 
-    @staticmethod
-    def is_existing_pair(player1, player2, tournament):
+    def is_existing_pair(self, player1, player2, tournament):
         for round in tournament.rounds:
 
             for pair in round.matches:

@@ -7,11 +7,12 @@ from controllers.inputcontroller import InputController
 
 class PlayerView:
     def get_player_input(self):
+        inputcontroller = InputController()
         dict_infos = {}
 
         while True:
             last_name = input("Nom de famille du joueur? : ")
-            if InputController.is_last_name(last_name):
+            if inputcontroller.is_last_name(last_name):
                 break
             else:
                 print("[red]ERREUR: Merci de donner un nom de famille valide[/red]")
@@ -19,7 +20,7 @@ class PlayerView:
 
         while True:
             first_name = input("Prénom du joueur? : ")
-            if InputController.is_first_name(first_name):
+            if inputcontroller.is_first_name(first_name):
                 break
             else:
                 print("[red]ERREUR: Merci de donner un prénom valide[/red]")
@@ -28,7 +29,7 @@ class PlayerView:
 
         while True:
             birth_date = input("Date de naissance du joueur? : ")
-            if InputController.is_date(birth_date):
+            if inputcontroller.is_date(birth_date):
                 break
             else:
                 print("[red]ERREUR: Merci de donner une date valide et pas dans le futur[/red]")
@@ -36,7 +37,7 @@ class PlayerView:
 
         while True:
             chess_id = input("Identifiant du joueur? : ")
-            if InputController.is_valid_id_chess(chess_id):
+            if inputcontroller.is_valid_id_chess(chess_id):
                 break
             else:
                 print("[red]ERREUR: Merci de donner un identifiant valide ex:AB12345[/red]")

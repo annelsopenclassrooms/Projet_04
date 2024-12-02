@@ -9,42 +9,42 @@ from controllers.tournamentcontroller import TournamentController
 
 class MenuController:
 
-    @staticmethod
-    def launch_main_menu(tournament):
+    def launch_main_menu(self, tournament):
         menuview = MenuView()
+        menucontroller = MenuController()
         while True:
-            try:
-                choice = int(menuview.main_menu())
-                print(f"Merci ! Vous avez entré : {choice}")
-                break
-            except ValueError:
-                print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
+            while True:
+                try:
+                    choice = int(menuview.main_menu())
+                    print(f"Merci ! Vous avez entré : {choice}")
+                    break
+                except ValueError:
+                    print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
-        match choice:
-            # 1. Creer des joueurs
-            case 1:
-                playercontroller = PlayerController()
-                playercontroller.create_player()
-            # 2. Tournois
-            case 2:
-                tournament = MenuController.launch_tournament_menu(tournament)
-            # 3. Rapports
-            case 3:
-                MenuController.launch_rapport_menu(tournament)
-            # 4. Quitter le programme
-            case 4:
-                print("BYE BYE")
-                exit()
-            case _:
-                print("[red]ERREUR: Merci d'entre un valeur comprise entre 1 et 4[/red]")
-        return (tournament)
+            match choice:
+                # 1. Creer des joueurs
+                case 1:
+                    playercontroller = PlayerController()
+                    playercontroller.create_player()
+                # 2. Tournois
+                case 2:
+                    tournament = menucontroller.launch_tournament_menu(tournament)
+                # 3. Rapports
+                case 3:
+                    menucontroller.launch_rapport_menu(tournament)
+                # 4. Quitter le programme
+                case 4:
+                    print("BYE BYE")
+                    exit()
+                case _:
+                    print("[red]ERREUR: Merci d'entre un valeur comprise entre 1 et 4[/red]")
 
-    @staticmethod
-    def launch_add_player_menu(tournament):
+    def launch_add_player_menu(self, tournament):
         menuview = MenuView()
         tournamentcontroller = TournamentController()
         playercontroller = PlayerController()
         tournamentview = TournamentView()
+        menucontroller = MenuController()
 
         if not tournament:
             print("[red]ERREUR: Merci de créer ou charger un tournois avant d'ajouter les joueurs[/red]")
@@ -90,16 +90,16 @@ class MenuController:
                             tournamentcontroller.save_tournament(tournament)
 
                     case 4:
-                        MenuController.launch_tournament_menu(tournament)
+                        menucontroller.launch_tournament_menu(tournament)
                     case _:
                         print("[red]ERREUR: Choix invalide. Veuillez choisir une option entre 1 et 4.[/red]")
         return (tournament)
 
-    @staticmethod
-    def launch_tournament_menu(tournament):
+    def launch_tournament_menu(self, tournament):
         menuview = MenuView()
         tournamentcontroller = TournamentController()
         tournamentview = TournamentView()
+        menucontroller = MenuController()
 
         while True:
             while True:
@@ -137,7 +137,7 @@ class MenuController:
                     if len(tournament.rounds) != 0:
                         print("[red]ERREUR: Le tournois est déjà lancé. Impossible d'ajouter des joueurs[/red]")
                     else:
-                        tournament = MenuController.launch_add_player_menu(tournament)
+                        tournament = menucontroller.launch_add_player_menu(tournament)
 
                 # 4. Lancer le tournois
                 case 4:
@@ -148,12 +148,12 @@ class MenuController:
                         # Tournament ready
                         while True:
                             if tournament.current_round >= tournament.rounds_number:
-                                MenuController.launch_end_of_tournament_menu(tournament)
-                                MenuController.launch_main_menu(tournament)
+                                menucontroller.launch_end_of_tournament_menu(tournament)
+                                menucontroller.launch_main_menu(tournament)
 
                             else:
                                 tournament = tournamentcontroller.start_tournament(tournament)
-                                MenuController.launch_next_round_menu(tournament)
+                                menucontroller.launch_next_round_menu(tournament)
                     else:
                         print("Merci de corriger le problème avant de lancer le tournois")
 
@@ -165,11 +165,11 @@ class MenuController:
                         print("[red]ERREUR: Aucun tournois en cours. Merci de créer ou charger un tournois[/red]")
                 # 6. Retour
                 case 6:
-                    MenuController.launch_main_menu(tournament)
+                    menucontroller.launch_main_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 6")
 
-    def launch_next_round_menu(tournament):
+    def launch_next_round_menu(self, tournament):
         menuview = MenuView()
         tournamentview = TournamentView()
 
@@ -197,15 +197,16 @@ class MenuController:
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 3")
 
-    def launch_end_of_tournament_menu(tournament):
+    def launch_end_of_tournament_menu(self, tournament):
         print("♜♞♝♛♚♝♞♜ ♟♟♟♟♟♟♟♟ FIN DU TOURNOIS ♟♟♟♟♟♟♟♟♜♞♝♛♚♝♞♜ ")
         tournamentview = TournamentView()
         tournamentview.display_ranking(tournament)
         return (tournament)
 
-    def launch_rapport_menu(tournament):
+    def launch_rapport_menu(self, tournament):
         menuview = MenuView()
         tournamentview = TournamentView()
+        menucontroller = MenuController()
 
         while True:
             while True:
@@ -230,14 +231,14 @@ class MenuController:
                 case 3:
                     tournamentview = TournamentView()
                     tournamentview.list_tournament_from_json()
-                    MenuController.launch_rapport_tournament_menu(tournament)
+                    menucontroller.launch_rapport_tournament_menu(tournament)
                 # 4. Retour
                 case 4:
-                    MenuController.launch_main_menu(tournament)
+                    menucontroller.launch_main_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 4")
 
-    def launch_rapport_tournament_menu(tournament):
+    def launch_rapport_tournament_menu(self, tournament):
         menuview = MenuView()
         tournamentview = TournamentView()
 

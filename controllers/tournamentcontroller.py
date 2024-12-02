@@ -87,9 +87,6 @@ class TournamentController:
             # Save tournament
             tournamentcontroller.save_tournament(tournament)
 
-        # matchview = MatchesView()
-        # matchview.input_results(tournament)
-
         Player.sort_by_total_points(tournament)
 
         round.end_time = datetime.now().strftime("%d/%m/%Y %H:%M")
