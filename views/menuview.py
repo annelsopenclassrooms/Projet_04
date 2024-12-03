@@ -106,7 +106,7 @@ class MenuView:
         print("[dark_blue]Voulez vous exporter le rapport ?[/dark_blue]")
         print("1. Oui")
         print("2. Non")
-        
+
         choice = input("choix ?:")
         return (choice)
 
@@ -114,6 +114,6 @@ class MenuView:
         print("[dark_blue]Voulez vous changer le nombre de tour ?[/dark_blue]")
         print("1. Oui")
         print("2. Non")
-        
+
         choice = input("choix ?:")
         return (choice)

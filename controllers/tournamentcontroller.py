@@ -94,7 +94,6 @@ class TournamentController:
         # Update current round in tournament
         tournament.current_round = tournament.current_round + 1
 
-
         # Save tournament
         tournamentcontroller.save_tournament(tournament)
 

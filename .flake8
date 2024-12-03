@@ -1,0 +1,5 @@
+[flake8]
+exclude = tests,export,env
+format = html
+htmldir = flake8-report
+max-line-length = 119

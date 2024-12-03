@@ -64,5 +64,3 @@ class InputController:
         # - Must be at least 2 characters long.
         pattern = r"^[A-ZÉÈÊËÀÂÄÎÏÔÖÛÜÇ][a-zA-Z0-9éèêëàâäîïôöûüç' -]{1,}$"
         return bool(re.match(pattern, name))
-
- 

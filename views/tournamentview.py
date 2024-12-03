@@ -116,7 +116,7 @@ class TournamentView:
                 tournaments = json.load(f)
 
         # prepare for export
-        title = ["Numéro", "Nom", "Lieux","Date de début"]
+        title = ["Numéro", "Nom", "Lieux", "Date de début"]
         table_to_export.append(title)
 
         # use Rich module to print a table
@@ -162,7 +162,7 @@ class TournamentView:
         table.add_column("Date de début", style="green")
         table.add_column("Date de fin", style="magenta")
 
-        table.add_row(str(tournament['name']),str(tournament['location']), str(tournament['start_date']),
+        table.add_row(str(tournament['name']), str(tournament['location']), str(tournament['start_date']),
                       str(tournament['end_date']))
 
         table_to_export.append([tournament['name'], tournament['location'],
@@ -171,7 +171,7 @@ class TournamentView:
         console = Console()
         console.print(table)
         return (table_to_export, tournament['name'])
-    
+
     def display_tournament_players_list(self, number):
 
         file_path = "data/tournaments/tournaments.json"

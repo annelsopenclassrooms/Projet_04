@@ -341,4 +341,3 @@ class MenuController:
                     break
                 case _:
                     print("[red]ERREUR: Merci d'entrer une valeur de 1 ou 2.[/red]")
-

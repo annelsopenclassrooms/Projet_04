@@ -36,7 +36,7 @@ class RoundController:
                 players_left.append(player)
 
             while True:
-                roundcontroller = RoundController()    
+                roundcontroller = RoundController()
                 player1 = players_left[0]
                 index_player2 = 0
                 index_same_total = 0

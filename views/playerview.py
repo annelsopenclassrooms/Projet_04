@@ -58,7 +58,7 @@ class PlayerView:
         sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
 
         # prepare for export
-        title = ["Prénom", "Nom", "date de naissance","Chess ID"]
+        title = ["Prénom", "Nom", "date de naissance", "Chess ID"]
         table_to_export.append(title)
 
         # use Rich module to print a table
