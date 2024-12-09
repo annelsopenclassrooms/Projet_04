@@ -1,15 +1,15 @@
 # Projet de gestionnaire de tournois d'échec
 
-Centre Échecs est une application hors ligne développée en Python pour la gestion des joueurs et des tournois d'échecs.
-Ce programme autonome permet d'ajouter des joueurs, de gérer des tournois, de suivre les résultats et de générer des rapports
+Super chess tournament manager est une application hors ligne développée en Python pour la gestion des joueurs et des tournois d'échecs.
+Ce programme autonome permet d'ajouter des joueurs, de gérer des tournois, de suivre les résultats et de générer des rapports.
 
 ## Fonctionnalités Principales: 
 
-L'application est composée de 3 categories accesibles via le menu principal
+L'application est composée de 3 categories accessibles via le menu principal.
 
 ### Gestion des Joueurs
 
-**Choix 1. Creer des joueurs**
+**Choix 1. Créer des joueurs**
 
 Permet l'ajout de joueurs au fichier des joueurs disponibles.
 
@@ -34,12 +34,12 @@ Déroulement d'un tournois:
     * En créant un nouveau joueur
 3. Un fois le tournois crée ou chargé et les joueurs ajouté au tournois l'utilisateur lance le tournois
 
-Le tournois peut etre interrompu et repris rechargé à tous moment. (vois plus loin "Sauvegarde et chargement")
+Le tournois peut etre interrompu et repris rechargé à tous moment. (vois plus loin "Sauvegarde et chargement").
 
 ### Rapports
 **Choix 3. Rapports**
 
-L'utilisateur peut acceder à diiferents par via ce menu:
+L'utilisateur peut accéder à différents par via ce menu:
 
 * Liste de tous les joueurs par ordre alphabétique.
 * Liste de tous les tournois.
@@ -47,11 +47,11 @@ L'utilisateur peut acceder à diiferents par via ce menu:
 
 ### Sauvegarde et Chargement
 
-Le tournois en cours est sauvegardé automatiquament apres chaque changement. (Création du tounois, ajout de joueur, nouveau match, round, ...)
+Le tournois en cours est sauvegardé automatiquement après chaque changement. (Création du tournois, ajout de joueurs, nouveau match, round, ...)
 
-L'utilisateur peut charger un tournois depuis le menu tournois grace à l'option **1. Charger un tournois**
+L'utilisateur peut charger un tournois depuis le menu tournois grâce à l'option **1. Charger un tournois**
 
-Le tournois pourra alors etre repris grace à l'option **"**4. Lancer/reprendre le tournois**"**
+Le tournois pourra alors être repris grâce à l'option **"**4. Lancer/reprendre le tournois**"**
 
 ## Installation et utilisation
 
@@ -95,7 +95,7 @@ python superchess.py
 ### Résultats :
 
 La gestion des joueurs et tournois va se lancer.
-Le script va créer deux repertoires dans le repertoire data:
+Le script va créer deux répertoires dans le répertoire data:
 
 * players
 * tournament

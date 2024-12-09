@@ -51,9 +51,15 @@ class PlayerView:
         table_to_export = []
 
         # Open file JSON
-        with open(file_path, 'r') as f:
-            # Load JSON in a list
-            players = json.load(f)
+        try:
+            with open(file_path, 'r') as f:
+                players = json.load(f)
+        except FileNotFoundError:
+            print(f"[red]ERREUR : Le fichier '{file_path}' est introuvable.[/red]")
+            return (None, None)
+        except json.JSONDecodeError:
+            print(f"[red]ERREUR : Le fichier '{file_path}' contient des données JSON non valides.[/red]")
+            return (None, None)
 
         sorted_players = sorted(players, key=lambda x: (x['last_name'].lower(), x['first_name'].lower()))
 
@@ -63,6 +69,7 @@ class PlayerView:
 
         # use Rich module to print a table
         table = Table(title="Liste des joueurs")
+        table.add_column("Numéro", style="deep_pink4")
         table.add_column("Prénom", style="purple3")
         table.add_column("Nom", style="magenta")
         table.add_column("Date de naissance", style="green")

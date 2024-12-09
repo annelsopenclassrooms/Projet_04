@@ -32,8 +32,16 @@ class PlayerController:
 
     def search_chess_id(self, chess_id):
         file_path = "data/players/players.json"
-        with open(file_path, 'r') as f:
-            data = json.load(f)
+
+        try:
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            print(f"[red]ERREUR : Le fichier '{file_path}' est introuvable.[/red]")
+            return (None)
+        except json.JSONDecodeError:
+            print(f"[red]ERREUR : Le fichier '{file_path}' contient des données JSON non valides.[/red]")
+            return (None)
 
         found = False
 

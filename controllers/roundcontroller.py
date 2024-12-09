@@ -31,76 +31,126 @@ class RoundController:
         else:
             Player.sort_by_total_points(tournament)
             players = tournament.players
+
+            print("players au debut")
+            print(players)
             players_left = []
             for player in players:
                 players_left.append(player)
 
             while True:
+                print("players left boucle principale")
+                print(players_left)
                 roundcontroller = RoundController()
                 player1 = players_left[0]
-                index_player2 = 0
+                print(f"player 1: {player1}")
+
+                # index_player2 = 1 because player_left[0] is player one
+                index_player2 = 1
                 index_same_total = 0
                 index_no_same_total = 0
                 # Player with the same total point
                 same_total = [player for player in players_left if player.total_points == players_left[0].total_points]
+                # Remove player 1 from same total list
                 same_total.remove(players_left[0])
 
                 while True:
 
-                    if len(same_total) == 0:
-                        if len(players_left) == 2:
-                            player2 = players_left[1]
-                            players_left.remove(player1)
-                            players_left.remove(player2)
-                            match = ([player1, 0], [player2, 0])
-                            round.matches.append(match)
-                            break
+                    print("### début boucle secondaire")
+                    print(f"index_player2: {index_player2}")
+                    print(f"index_same_total: {index_same_total}")
+                    print(f"index_no_same_total: {index_no_same_total}")
+                    print(f"len(same_total): {len(same_total)}")
 
-                        else:
-                            if index_no_same_total + 1 == len(players_left):
-                                player2 = players_left[1]
-                                players_left.remove(player1)
-                                players_left.remove(player2)
-                                match = ([player1, 0], [player2, 0])
-                                round.matches.append(match)
-                                break
-
-                            else:
-                                player2 = players_left[index_no_same_total + 1]
-                                index_no_same_total = index_no_same_total + 1
-                    if len(same_total) > 0:
-
-                        if (len(same_total)) <= (index_player2):
-                            # Change total points
-                            # If it's no more non existing pairs
-                            if (len(same_total)) <= len(same_total) + index_same_total:
-                                player2 = players_left[1]
-                                players_left.remove(player1)
-                                players_left.remove(player2)
-                                match = ([player1, 0], [player2, 0])
-                                round.matches.append(match)
-                                break
-                            else:
-                                player2 = players_left[len(same_total) + index_same_total]
-
-                        else:
-                            random.shuffle(same_total)
-                            player2 = same_total[index_player2]
-
-                    if roundcontroller.is_existing_pair(player1, player2, tournament):
-
-                        index_player2 = index_player2 + 1
-                        index_same_total = index_same_total + 1
-                    else:
+                    if len(players_left) == 2:
+                        print("###NEW PAIR ADDED TWO PLAYERS LEFT")
+                        player2 = players_left[1]
                         players_left.remove(player1)
                         players_left.remove(player2)
                         match = ([player1, 0], [player2, 0])
                         round.matches.append(match)
                         break
 
+                    else:
+                                                                                
+                        # if there is no other player with same points
+                        if len(same_total) == 0:
+
+                            # if index no same total + 1 == nb player left
+                            if index_no_same_total + 1 == len(players_left):
+                                player2 = players_left[1]
+                                index_no_same_total = index_no_same_total + 1
+
+                            else:
+                                player2 = players_left[index_no_same_total + 1]
+                                index_no_same_total = index_no_same_total + 1
+
+                        # if there is one other player with same points
+                        if len(same_total) == 1:
+
+                            print("if len(same_total) == 1:")
+                            player2 = players_left[1 + index_same_total]
+                            index_same_total = index_same_total + 1
+                            print(f"player 2: {player2}")
+
+
+                        # if there more than one player with same points
+                        if len(same_total) > 1:
+                            print("si len(same_total) > 1")
+
+                            if (len(same_total)) <= (index_player2):
+                                
+                                print("(len(same_total)) <= (index_player2):")
+                                # Change total points
+                                # If it's no more non existing pairs
+                                print(f"len(same_total): {len(same_total)}")
+                                if (len(same_total)) <= len(same_total) + index_same_total:
+                                    print("if (len(same_total)) <= len(same_total) + index_same_total")
+                                    player2 = players_left[index_player2]
+                                    index_player2 = index_player2 + 1
+
+                                    print(f"player 2: {player2}")
+
+                                else:
+                                    print("else (len(same_total)) <= len(same_total) + index_same_total")
+                                    player2 = players_left[len(same_total) + index_same_total]
+                                    index_same_total = index_same_total + 1
+                                    print(f"player 2: {player2}")
+                                    #break
+
+                            else:
+                                print("else len(same_total)) <= (index_player2)")
+                                random.shuffle(same_total)
+                                player2 = same_total[index_player2]
+                                #index_player2 = index_player2 + 1
+                                #break
+
+                        if roundcontroller.is_existing_pair(player1, player2, tournament):
+                            print("roundcontroller.is_existing_pair")
+                            #index_player2 = index_player2 + 1
+                            #index_same_total = index_same_total + 1
+                        else:
+                            print("else roundcontroller.is_existing_pair")
+                            print("###NEW PAIR ADDED")
+                            players_left.remove(player1)
+                            players_left.remove(player2)
+                            match = ([player1, 0], [player2, 0])
+                            round.matches.append(match)
+                            index_player2 = 1
+
+                            break
+
+                # si plus de joueurs
                 if len(players_left) == 0:
-                    print("break")
-                    break
+
+                    if roundcontroller.is_existing_pair(player1, player2, tournament):
+                        # Redraw because if nb player > nb round we don't want 2 same matches
+                        pass
+
+                    else:
+                        # draw is complete and there is no same match
+                        print("break")
+                        break
 
         print(f"[cyan]Matchs du tour {int(round.name) + 1}:[/cyan]")
         for match in round.matches:
@@ -110,6 +160,8 @@ class RoundController:
                 )
 
     def is_existing_pair(self, player1, player2, tournament):
+
+        print(f"joueurs testés{player1}, {player2}")
         for round in tournament.rounds:
 
             for pair in round.matches:

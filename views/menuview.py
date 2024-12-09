@@ -47,21 +47,27 @@ class MenuView:
         playerview = PlayerView()
         players, table_to_export = playerview.get_players_list()
 
-        while True:
-            try:
-                choice = int(input("choix ?:"))
-                print(f"Merci ! Vous avez entré : {choice}")
-                if len(players) < choice or choice == 0:
-                    print("Merci d'entrer un valeur existante")
-                else:
-                    break
-            except ValueError:
-                print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
+        if players:
 
-        choice = choice - 1
-        print(f"[green]Vous avez ajouté {players[choice]['first_name']} {players[choice]['last_name']}[/green]")
+            while True:
+                try:
+                    choice = int(input("choix ?:"))
+                    print(f"Merci ! Vous avez entré : {choice}")
+                    if len(players) < choice or choice == 0:
+                        print("Merci d'entrer un valeur existante")
+                    else:
+                        break
+                except ValueError:
+                    print("[red]ERREUR: ce n'est pas un entier valide. Veuillez réessayer.[/red]")
 
-        return (players[choice])
+            choice = choice - 1
+            print(f"[green]Vous avez ajouté {players[choice]['first_name']} {players[choice]['last_name']}[/green]")
+
+            return (players[choice])
+
+        else:
+            print("[red]ERREUR: Il n'y a aucun joueur enregistré.[/red]")
+            return (None)
 
     # choice 2
     def get_player_from_chess_id(self):

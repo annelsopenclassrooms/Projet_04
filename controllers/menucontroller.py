@@ -67,20 +67,24 @@ class MenuController:
                     case 1:
                         print("Ajouter un joueur depuis la liste des joueurs existants.")
                         player = menuview.get_player_from_list()
-                        if playercontroller.is_player_in_tournament(player, tournament):
-                            print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
-                        else:
-                            tournamentcontroller.instantiate_player(player, tournament)
-                            tournamentcontroller.save_tournament(tournament)
+                        if player:
+                            if playercontroller.is_player_in_tournament(player, tournament):
+                                print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
+                            else:
+                                tournamentcontroller.instantiate_player(player, tournament)
+                                tournamentcontroller.save_tournament(tournament)
 
                     case 2:
                         print("Ajouter un joueur depuis son Chess ID.")
                         player = menuview.get_player_from_chess_id()
-                        if playercontroller.is_player_in_tournament(player, tournament):
-                            print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
+                        if player:
+                            if playercontroller.is_player_in_tournament(player, tournament):
+                                print("[red]ERREUR: Joueur.se déjà présent.e dans le tournois[/red]")
+                            else:
+                                tournamentcontroller.instantiate_player(player, tournament)
+                                tournamentcontroller.save_tournament(tournament)
                         else:
-                            tournamentcontroller.instantiate_player(player, tournament)
-                            tournamentcontroller.save_tournament(tournament)
+                            print("[red]ERREUR: Il n'y a aucun joueur enregistré.[/red]")
                     case 3:
                         print("Créer un nouveau joueur et l'ajouter au tournoi.")
                         playercontroller = PlayerController()
@@ -136,10 +140,14 @@ class MenuController:
 
                 # 3. Ajouter des joueurs au tournois
                 case 3:
-                    if len(tournament.rounds) != 0:
-                        print("[red]ERREUR: Le tournois est déjà lancé. Impossible d'ajouter des joueurs[/red]")
+                    if tournament:
+                        if len(tournament.rounds) != 0:
+                            print("[red]ERREUR: Le tournois est déjà lancé. Impossible d'ajouter des joueurs[/red]")
+                        else:
+                            tournament = menucontroller.launch_add_player_menu(tournament)
                     else:
-                        tournament = menucontroller.launch_add_player_menu(tournament)
+                        print("[red]ERREUR: Aucun tournois crée ou chargé[/red]")
+
 
                 # 4. Lancer le tournois
                 case 4:
@@ -178,6 +186,7 @@ class MenuController:
     def launch_next_round_menu(self, tournament):
         menuview = MenuView()
         tournamentview = TournamentView()
+        menucontroller = MenuController()
 
         while True:
 
@@ -199,7 +208,7 @@ class MenuController:
                     tournamentview.display_ranking(tournament)
                 # 3. Retour
                 case 3:
-                    MenuController.launch_tournament_menu(tournament)
+                    menucontroller.launch_tournament_menu(tournament)
                 case _:
                     print("Merci d'entrer un valeur entre 1 et 3")
 
@@ -229,18 +238,21 @@ class MenuController:
                 case 1:
                     playerview = PlayerView()
                     players, table_to_export = playerview.get_players_list()
-                    menucontroller.launch_export_menu(table_to_export, "Liste_des_joueurs")
+                    if players:
+                        menucontroller.launch_export_menu(table_to_export, "Liste_des_joueurs")
                 # 2. Liste de tous les tournois
                 case 2:
                     tournamentview = TournamentView()
                     table_to_export = tournamentview.list_tournament_from_json()
-                    menucontroller.launch_export_menu(table_to_export, "Liste_des_tournois")
+                    if table_to_export:
+                        menucontroller.launch_export_menu(table_to_export, "Liste_des_tournois")
 
                 # 3. Détails d'un tournois
                 case 3:
                     tournamentview = TournamentView()
-                    tournamentview.list_tournament_from_json()
-                    menucontroller.launch_rapport_tournament_menu(tournament)
+                    # tournamentview.list_tournament_from_json()
+                    if tournamentview.list_tournament_from_json():
+                        menucontroller.launch_rapport_tournament_menu(tournament)
                 # 4. Retour
                 case 4:
                     menucontroller.launch_main_menu(tournament)

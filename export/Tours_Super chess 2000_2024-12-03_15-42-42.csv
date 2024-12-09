@@ -1,0 +1,7 @@
+Tour,Prénom joueur 1,Nom Joueur 1,Prénom joueur 2,Score joueur 1,Prénom joueur 2,Nom Joueur 2,Score joueur 2
+1,Serge,Traver,1,Romain,Lane,0
+1,Martine,Fabron,0,Romaine,Moreau,1
+2,Serge,Traver,1,Romaine,Moreau,0
+2,Romain,Lane,0.5,Martine,Fabron,0.5
+3,Serge,Traver,1,Martine,Fabron,0
+3,Romaine,Moreau,0,Romain,Lane,1

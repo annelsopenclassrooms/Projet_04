@@ -17,7 +17,7 @@ class TournamentView:
         inputcontroller = InputController()
 
         while True:
-            tournament_name = input("Nom du tounois ?: ")
+            tournament_name = input("Nom du tournois ?: ")
             if inputcontroller.is_tournament_name(tournament_name):
                 break
             else:
@@ -110,10 +110,15 @@ class TournamentView:
         file_path = "data/tournaments/tournaments.json"
         table_to_export = []
 
-        if os.path.exists(file_path):
-            # Load file if existing
-            with open(file_path, "r") as f:
+        try:
+            with open(file_path, 'r') as f:
                 tournaments = json.load(f)
+        except FileNotFoundError:
+            print(f"[red]ERREUR : Le fichier '{file_path}' est introuvable.[/red]")
+            return (None)
+        except json.JSONDecodeError:
+            print(f"[red]ERREUR : Le fichier '{file_path}' contient des données JSON non valides.[/red]")
+            return (None)
 
         # prepare for export
         title = ["Numéro", "Nom", "Lieux", "Date de début"]
@@ -149,7 +154,7 @@ class TournamentView:
             with open(file_path, "r") as f:
                 tournaments = json.load(f)  # Charge les données existantes dans une liste
 
-        tournament = tournaments[number]
+        tournament = tournaments[number - 1]
 
         # prepare for export
         title = ["Nom", "Lieux", "Date de début", "Date de fin"]
@@ -194,8 +199,8 @@ class TournamentView:
         # use Rich module to print a table
         table = Table(title="Liste des joueurs dans le tournois")
 
-        table.add_column("Nom", style="purple3")
-        table.add_column("Prénom", style="cyan")
+        table.add_column("Prénom", style="purple3")
+        table.add_column("Nom", style="cyan")
 
         for player in sorted_players:
             table.add_row(str(player['first_name']), str(player['last_name']))
@@ -254,8 +259,8 @@ class TournamentView:
 
         table = Table(title="Liste des joueurs dans le tournois en cours")
 
-        table.add_column("Nom", style="purple3")
-        table.add_column("Prénom", style="cyan")
+        table.add_column("Prénom", style="purple3")
+        table.add_column("Nom", style="cyan")
 
         for player in tournament.players:
             table.add_row(str(player.first_name), str(player.last_name))
@@ -264,8 +269,6 @@ class TournamentView:
         console.print(table)
 
     def export(self, table, title):
-        print(table)
-        print(title)
 
         # Create 'export' directory if it doesn't exist
         if not os.path.exists('export'):
