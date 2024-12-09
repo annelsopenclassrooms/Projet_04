@@ -1,4 +1,3 @@
-
 from rich import print
 
 from views.tournamentview import TournamentView
@@ -147,7 +146,6 @@ class MenuController:
                             tournament = menucontroller.launch_add_player_menu(tournament)
                     else:
                         print("[red]ERREUR: Aucun tournois crée ou chargé[/red]")
-
 
                 # 4. Lancer le tournois
                 case 4:
